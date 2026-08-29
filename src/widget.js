@@ -1,6 +1,5 @@
 class MuskleMap extends HTMLElement {
     connectedCallback() {
-        // 1. Component Initialization & State
         this.showStudents = true;
         this.showProfessors = true;
         this.selectedCohort = 'all';
@@ -21,23 +20,77 @@ class MuskleMap extends HTMLElement {
         fontLink.rel = 'stylesheet';
         document.head.appendChild(fontLink);
 
-        // 2. HTML Structure Injection
         this.innerHTML = `
-            <div style="font-family: 'Montserrat', system-ui, sans-serif; max-width: 1000px; margin: 0 auto; color: #111827;">
+            <style>
+                .muskle-map-wrapper { font-family: 'Montserrat', system-ui, sans-serif; max-width: 1200px; margin: 0 auto; color: #111827; }
                 
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                    <h2 style="margin: 0; font-size: 26px; font-weight: 700; color: #111827; letter-spacing: -0.5px;">
-                        Summer School Network
-                    </h2>
+                .muskle-header-container { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; gap: 16px; flex-wrap: wrap; }
+                .muskle-header-title { margin: 0; font-size: clamp(20px, 4vw + 0.5rem, 26px); font-weight: 700; color: #111827; letter-spacing: -0.5px; line-height: 1.2; }
+                
+                .muskle-split-container {
+                    display: grid;
+                    grid-template-columns: 1.3fr 1fr;
+                    gap: 24px;
+                    height: clamp(600px, 75vh, 900px);
+                }
+                
+                .muskle-map-box {
+                    height: 100%; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+                    overflow: hidden; background: radial-gradient(circle at 50% 50%, #1e293b 0%, #000000 100%);
+                }
+                .muskle-map-viewport { width: 100%; height: 100%; }
+                
+                .muskle-panel-box {
+                    border-radius: 16px; background: #ffffff; border: 1px solid #e5e7eb;
+                    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+                    height: 100%; display: flex; flex-direction: column; overflow-y: auto;
+                    position: relative;
+                }
+                
+                .muskle-panel-box::-webkit-scrollbar { width: 6px; }
+                .muskle-panel-box::-webkit-scrollbar-track { background: transparent; }
+                .muskle-panel-box::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 6px; }
+                .muskle-panel-box::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+                
+                .muskle-profile-card {
+                    background: #ffffff; padding: 24px; border-radius: 16px; border: 1px solid #e5e7eb;
+                    display: flex; flex-direction: column; gap: 16px;
+                    box-shadow: 0 4px 15px rgba(0,0,0,0.03); transition: transform 0.3s ease, box-shadow 0.3s ease;
+                }
+                .muskle-profile-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.08); }
+                
+                .muskle-profile-header { display: flex; align-items: flex-start; gap: 24px; width: 100%; }
+                .muskle-profile-avatar { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; background: #f3f4f6; flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+                .muskle-profile-details { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+                .muskle-profile-name { margin: 0 0 4px 0; font-size: 20px; font-weight: 700; color: #1B365D; letter-spacing: -0.5px; word-wrap: break-word; }
+                .muskle-profile-inst { font-size: 13px; font-weight: 500; color: #1B365D; margin-bottom: 8px; word-wrap: break-word; line-height: 1.4; }
+                .muskle-profile-tags { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; flex-wrap: wrap; }
+                .muskle-profile-body { width: 100%; }
+                
+                @media (max-width: 900px) {
+                    .muskle-split-container { display: flex; flex-direction: column; height: auto; }
+                    .muskle-map-box { height: clamp(300px, 45vh, 550px); width: 100%; }
+                    .muskle-panel-box { height: auto; overflow: visible; }
+                    
+                    .muskle-profile-header { flex-direction: column; align-items: center; text-align: center; gap: 16px; }
+                    .muskle-profile-details { align-items: center; }
+                    .muskle-profile-tags { justify-content: center; }
+                    .bio-text { text-align: center !important; }
+                    .muskle-profile-body { display: flex; flex-direction: column; align-items: center; }
+                }
+            </style>
+            
+            <div class="muskle-map-wrapper">
+                <div class="muskle-header-container">
+                    <h2 class="muskle-header-title">Summer School Network</h2>
                     
                     <div style="position: relative;">
-                        <button id="btn-toggle-filters" style="display: flex; align-items: center; gap: 8px; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 20px; padding: 10px 20px; cursor: pointer; font-size: 14px; font-weight: 600; color: #1B365D; box-shadow: 0 2px 4px rgba(0,0,0,0.05); transition: all 0.2s;">
+                        <button id="btn-toggle-filters" style="display: flex; align-items: center; gap: 8px; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 20px; padding: 10px 16px; cursor: pointer; font-size: 14px; font-weight: 600; color: #1B365D; box-shadow: 0 2px 4px rgba(0,0,0,0.05); transition: all 0.2s;">
                             <svg style="width: 18px; height: 18px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path></svg>
                             Filters
                         </button>
                         
                         <div id="filter-dropdown" style="display: none; position: absolute; right: 0; top: calc(100% + 10px); background: #ffffff; border: 1px solid #e5e7eb; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 260px; padding: 20px; z-index: 10;">
-                            
                             <h4 style="margin: 0 0 12px 0; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #6b7280;">Role</h4>
                             <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px;">
                                 <label style="cursor: pointer; font-size: 14px; font-weight: 500; display: flex; align-items: center; gap: 10px;">
@@ -51,12 +104,10 @@ class MuskleMap extends HTMLElement {
                                     Professors
                                 </label>
                             </div>
-
                             <h4 style="margin: 0 0 12px 0; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #6b7280;">Background</h4>
                             <select id="filter-background" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #d1d5db; font-size: 14px; font-family: inherit; color: #111827; background: #f9fafb; outline: none; cursor: pointer; margin-bottom: 20px;">
                                 <option value="all">All Backgrounds</option>
                             </select>
-
                             <h4 style="margin: 0 0 12px 0; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #6b7280;">Cohort Year</h4>
                             <select id="filter-cohort" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #d1d5db; font-size: 14px; font-family: inherit; color: #111827; background: #f9fafb; outline: none; cursor: pointer;">
                                 <option value="all">All Cohorts</option>
@@ -65,38 +116,35 @@ class MuskleMap extends HTMLElement {
                     </div>
                 </div>
 
-                <div style="border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); overflow: hidden; margin-bottom: 24px; background: radial-gradient(circle at 50% 50%, #1e293b 0%, #000000 100%);">
-                    <div id="muskle-map-container" style="width: 100%; height: 550px;"></div>
-                </div>
-
-                <div style="border-radius: 16px; background: #ffffff; border: 1px solid #e5e7eb; box-shadow: 0 10px 30px rgba(0,0,0,0.08); min-height: 250px; display: flex; flex-direction: column; overflow: hidden;">
-                    
-                    <div id="info-empty" style="padding: 50px; text-align: center; color: #6b7280; margin: auto;">
-                        <div style="width: 64px; height: 64px; margin: 0 auto 20px auto; border-radius: 50%; background: #f3f4f6; display: flex; align-items: center; justify-content: center;">
-                            <svg style="width: 32px; height: 32px; color: #9ca3af;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
-                        </div>
-                        <p style="font-size: 16px; font-weight: 400; margin: 0;">Select a location on the map to discover the members of the Muskle network.</p>
+                <div class="muskle-split-container">
+                    <div class="muskle-map-box">
+                        <div id="muskle-map-container" class="muskle-map-viewport"></div>
                     </div>
 
-                    <div id="info-active" style="display: none; flex-direction: column; height: 100%;">
-                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px 30px; border-bottom: 1px solid #f3f4f6; background: #f9fafb;">
-                            
-                            <button id="btn-prev" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 50%; cursor: pointer; color: #1B365D; box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: all 0.2s;">
-                                <svg style="width: 20px; height: 20px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-                            </button>
-                            
-                            <h3 id="info-title" style="margin: 0; font-size: 22px; font-weight: 700; color: #111827; text-align: center; flex: 1; padding: 0 20px;">City, Country</h3>
-                            
-                            <div style="display: flex; gap: 12px;">
-                                <button id="btn-next" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 50%; cursor: pointer; color: #1B365D; box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: all 0.2s;">
-                                    <svg style="width: 20px; height: 20px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                                </button>
-                                <button id="btn-close" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: #fef2f2; border: 1px solid #fecaca; border-radius: 50%; cursor: pointer; color: #dc2626; box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: all 0.2s;">
-                                    <svg style="width: 20px; height: 20px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                                </button>
+                    <div id="muskle-panel-container" class="muskle-panel-box">
+                        <div id="info-empty" style="padding: 50px 20px; text-align: center; color: #6b7280; margin: auto;">
+                            <div style="width: 64px; height: 64px; margin: 0 auto 20px auto; border-radius: 50%; background: #f3f4f6; display: flex; align-items: center; justify-content: center;">
+                                <svg style="width: 32px; height: 32px; color: #9ca3af;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
                             </div>
+                            <p style="font-size: 16px; font-weight: 400; margin: 0;">Select a location on the map to discover the members of the Muskle network.</p>
                         </div>
-                        <div id="info-content" style="padding: 30px; display: flex; flex-direction: column; gap: 24px;">
+
+                        <div id="info-active" style="display: none; flex-direction: column;">
+                            <div style="position: sticky; top: 0; z-index: 5; display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid #f3f4f6; background: rgba(249, 250, 251, 0.95); backdrop-filter: blur(4px);">
+                                <button id="btn-prev" style="width: 40px; height: 40px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 50%; cursor: pointer; color: #1B365D; box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: all 0.2s;">
+                                    <svg style="width: 20px; height: 20px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                                </button>
+                                <h3 id="info-title" style="margin: 0; font-size: clamp(18px, 4vw, 22px); font-weight: 700; color: #111827; text-align: center; flex: 1; padding: 0 16px; line-height: 1.2;">City, Country</h3>
+                                <div style="display: flex; gap: 8px; flex-shrink: 0;">
+                                    <button id="btn-next" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 50%; cursor: pointer; color: #1B365D; box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: all 0.2s;">
+                                        <svg style="width: 20px; height: 20px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                    </button>
+                                    <button id="btn-close" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: #fef2f2; border: 1px solid #fecaca; border-radius: 50%; cursor: pointer; color: #dc2626; box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: all 0.2s;">
+                                        <svg style="width: 20px; height: 20px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="info-content" style="padding: 24px 20px; display: flex; flex-direction: column; gap: 20px;"></div>
                         </div>
                     </div>
                 </div>
@@ -108,7 +156,6 @@ class MuskleMap extends HTMLElement {
     }
 
     setupInteractions() {
-        // 3. UI Event Listeners (Dropdowns & Navigation)
         const btnToggle = this.querySelector('#btn-toggle-filters');
         const dropdown = this.querySelector('#filter-dropdown');
 
@@ -150,7 +197,7 @@ class MuskleMap extends HTMLElement {
         this.querySelector('#btn-next').addEventListener('click', () => this.navigate(1));
         this.querySelector('#btn-close').addEventListener('click', () => {
             this.resetPanel();
-            this.map.flyTo({ center: [10.0, 40.0], zoom: 1.5, duration: 2000 });
+            this.map.flyTo({ center: [10.0, 40.0], zoom: this.baseZoom, duration: 2000 });
             this.spinEnabled = true;
         });
 
@@ -165,13 +212,17 @@ class MuskleMap extends HTMLElement {
     }
 
     async initMap() {
-        // 4. MapLibre Initialization & Data Fetching
+        const container = this.querySelector('#muskle-map-container');
+        const minDimension = Math.min(container.clientWidth || 600, container.clientHeight || 600);
+        // Adjusted the base offset (+0.8 instead of -0.2) to make the globe fill the viewport better
+        this.baseZoom = Math.max(0.5, Math.log2(minDimension / 512) + 0.8);
+
         this.map = new maplibregl.Map({
-            container: this.querySelector('#muskle-map-container'),
+            container: container,
             style: 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json',
             center: [10.0, 40.0],
-            zoom: 1.5,
-            pitch: 20 
+            zoom: this.baseZoom,
+            pitch: 0 
         });
 
         this.map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
@@ -274,7 +325,6 @@ class MuskleMap extends HTMLElement {
     }
 
     setupMapLayers() {
-        // 5. Map Layers Configuration (Countries, Lines, Points)
         this.map.addSource('world-countries', {
             type: 'geojson',
             data: 'https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_admin_0_countries.geojson'
@@ -346,7 +396,6 @@ class MuskleMap extends HTMLElement {
             paint: { 'text-color': '#ffffff' }
         });
 
-        // 6. Map Interactions (Hover & Click)
         this.map.on('mouseenter', 'institutions-circles', (e) => {
             this.map.getCanvas().style.cursor = 'pointer';
             const props = e.features[0].properties;
@@ -377,7 +426,6 @@ class MuskleMap extends HTMLElement {
     }
 
     updateData() {
-        // 7. Data Filtering & City Grouping
         if (!this.map || !this.map.getSource('institutions-data')) return;
 
         const cityMap = new Map();
@@ -463,7 +511,6 @@ class MuskleMap extends HTMLElement {
     }
 
     renderClusters() {
-        // 8. Custom JS Clustering & Geometry Generation
         if (!this.map || !this.map.getSource('institutions-data')) return;
 
         const mergeRadius = 45; 
@@ -558,7 +605,6 @@ class MuskleMap extends HTMLElement {
     }
 
     selectCity(cityNode, moveMap = true) {
-        // 9. Profile Panel Rendering & Pagination
         this.querySelector('#info-empty').style.display = 'none';
         this.querySelector('#info-active').style.display = 'flex';
         this.querySelector('#info-title').innerText = cityNode.title;
@@ -571,24 +617,7 @@ class MuskleMap extends HTMLElement {
 
             visiblePeople.forEach(person => {
                 const card = document.createElement('div');
-                card.style.background = '#ffffff';
-                card.style.padding = '24px';
-                card.style.borderRadius = '16px';
-                card.style.border = '1px solid #e5e7eb';
-                card.style.display = 'flex';
-                card.style.alignItems = 'flex-start';
-                card.style.gap = '24px';
-                card.style.boxShadow = '0 4px 15px rgba(0,0,0,0.03)';
-                card.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
-                
-                card.addEventListener('mouseenter', () => {
-                    card.style.transform = 'translateY(-4px)';
-                    card.style.boxShadow = '0 12px 24px rgba(0,0,0,0.08)';
-                });
-                card.addEventListener('mouseleave', () => {
-                    card.style.transform = 'translateY(0)';
-                    card.style.boxShadow = '0 4px 15px rgba(0,0,0,0.03)';
-                });
+                card.className = 'muskle-profile-card';
 
                 const imagePath = `images/${person.photo}`;
                 const roleColor = (person.role === 'student' || person.role === 'étudiant') ? '#F2A900' : '#1B365D';
@@ -600,15 +629,15 @@ class MuskleMap extends HTMLElement {
                 const bgTag = person.background ? `<span style="font-size: 12px; font-weight: 600; color: #475569; background: #f1f5f9; padding: 4px 12px; border-radius: 20px; border: 1px solid #e2e8f0;">Background: ${person.background}</span>` : '';
                 const cohortTag = person.year ? `<span style="font-size: 12px; font-weight: 600; color: #475569; background: #f1f5f9; padding: 4px 12px; border-radius: 20px; border: 1px solid #e2e8f0;">Cohort: ${person.year}</span>` : '';
 
-                const instTag = person.institutionName ? `<div style="font-size: 13px; font-weight: 500; color: #1B365D; margin-bottom: 8px;">🏢 ${person.institutionName}</div>` : '';
+                const instTag = person.institutionName ? `<div class="muskle-profile-inst">🏢 ${person.institutionName}</div>` : '';
 
                 const hasBio = person.biosketch && person.biosketch.length > 0;
                 const bioHtml = hasBio ? `
-                    <div class="bio-container" style="position: relative; margin-top: 12px;">
-                        <p class="bio-text" style="font-size: 14px; color: #475569; line-height: 1.6; margin: 0; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; transition: all 0.3s ease;">
+                    <div style="position: relative; margin-top: 12px;">
+                        <p class="bio-text" style="font-size: 14px; color: #475569; line-height: 1.6; margin: 0; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; transition: all 0.3s ease; text-align: left;">
                             ${person.biosketch}
                         </p>
-                        <button class="bio-toggle" style="background: none; border: none; color: #3b82f6; font-size: 13px; font-weight: 600; padding: 0; margin-top: 8px; cursor: pointer; display: flex; align-items: center; gap: 4px; font-family: inherit;">
+                        <button class="bio-toggle" style="background: none; border: none; color: #3b82f6; font-size: 13px; font-weight: 600; padding: 0; margin-top: 8px; cursor: pointer; display: flex; align-items: center; gap: 4px; font-family: inherit; justify-content: inherit;">
                             Read more <svg style="width:14px; height:14px; transition: transform 0.3s;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
                     </div>
@@ -621,30 +650,25 @@ class MuskleMap extends HTMLElement {
                     </a>
                 ` : '';
 
+                // Refactored structure to let Bio text span full width
                 card.innerHTML = `
-                    <div style="flex-shrink: 0; position: relative;">
-                        <img src="${imagePath}" alt="${person.firstName}" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; background: #f3f4f6; border: 3px solid ${roleColor}; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+                    <div class="muskle-profile-header">
+                        <img class="muskle-profile-avatar" src="${imagePath}" alt="${person.firstName}" style="border: 3px solid ${roleColor};">
+                        <div class="muskle-profile-details">
+                            <h4 class="muskle-profile-name">${person.firstName} ${person.lastName}</h4>
+                            ${instTag}
+                            <div class="muskle-profile-tags">
+                                <span style="font-size: 12px; font-weight: 600; color: ${roleColor}; padding: 4px 12px; border-radius: 20px; border: 1px solid ${roleColor}40; background: ${roleColor}10;">
+                                    ${roleDisplay}
+                                </span>
+                                ${cohortTag}
+                                ${bgTag}
+                            </div>
+                        </div>
                     </div>
-                    <div style="flex: 1; min-width: 0; display: flex; flex-direction: column;">
-                        <h4 style="margin: 0 0 4px 0; font-size: 20px; font-weight: 700; color: #1B365D; letter-spacing: -0.5px;">
-                            ${person.firstName} ${person.lastName}
-                        </h4>
-                        
-                        ${instTag}
-                        
-                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px; flex-wrap: wrap;">
-                            <span style="font-size: 12px; font-weight: 600; color: ${roleColor}; padding: 4px 12px; border-radius: 20px; border: 1px solid ${roleColor}40; background: ${roleColor}10;">
-                                ${roleDisplay}
-                            </span>
-                            ${cohortTag}
-                            ${bgTag}
-                        </div>
-                        
+                    <div class="muskle-profile-body">
                         ${bioHtml}
-                        
-                        <div>
-                            ${linkedinHtml}
-                        </div>
+                        <div>${linkedinHtml}</div>
                     </div>
                 `;
 
@@ -686,24 +710,9 @@ class MuskleMap extends HTMLElement {
                 
                 moreBtnContainer.appendChild(moreBtn);
                 content.appendChild(moreBtnContainer);
-            } else if (cityNode.people.length > 3) {
-                const lessBtnContainer = document.createElement('div');
-                lessBtnContainer.style.textAlign = 'center';
-                lessBtnContainer.style.marginTop = '10px';
-                
-                const lessBtn = document.createElement('button');
-                lessBtn.innerHTML = `Show less ▴`;
-                lessBtn.style.cssText = 'background: #f1f5f9; border: 1px solid #e2e8f0; color: #1B365D; font-weight: 600; padding: 10px 24px; border-radius: 20px; cursor: pointer; transition: all 0.2s; font-family: inherit; font-size: 14px;';
-                lessBtn.addEventListener('mouseenter', () => lessBtn.style.background = '#e2e8f0');
-                lessBtn.addEventListener('mouseleave', () => lessBtn.style.background = '#f1f5f9');
-                lessBtn.addEventListener('click', () => {
-                    renderProfiles(3);
-                    this.querySelector('#info-active').scrollIntoView({ behavior: 'smooth', block: 'start' });
-                });
-                
-                lessBtnContainer.appendChild(lessBtn);
-                content.appendChild(lessBtnContainer);
             }
+            
+            this.querySelector('.muskle-panel-box').scrollTop = 0;
         };
 
         renderProfiles(3);
@@ -719,6 +728,7 @@ class MuskleMap extends HTMLElement {
         this.currentIndex = -1;
         this.querySelector('#info-empty').style.display = 'block';
         this.querySelector('#info-active').style.display = 'none';
+        this.querySelector('.muskle-panel-box').scrollTop = 0;
     }
 }
 
