@@ -1,0 +1,1355 @@
+[
+  {
+    "institution": "Université Savoie Mont Blanc",
+    "city": "Chambéry",
+    "lat": 45.56628,
+    "lng": 5.92079,
+    "country": "FR",
+    "people": [
+      {
+        "firstName": "Baptiste",
+        "lastName": "MOREL",
+        "role": "professor",
+        "year": "",
+        "linkedin": "https://www.linkedin.com/in/baptistemorel",
+        "photo": "baptiste-morel.jpg",
+        "background": "Organism",
+        "biosketch": "Dr Baptiste Morel is Associate Professor at University Savoie Mont-Blanc (Chambéry), working in the Inter-University Laboratory of Human Movement Biology (LIBM). His research investigates fatigue phenomenon at the interface of muscle physiology and biomechanics with applications in the domains of health, sports performance, and ecology. In particular, he develops a conceptual framework and a mathematical model of the force-velocity-endurance relationship. In this context, he is Principal Investigator of the interdisciplinary projects BIOCARE FActory (building a biopsychosocial model of cancer related fatigue) and FOVEAL (ANR - Force-velocity-endurance in animal locomotion). He also collaborates with several professional sports structures (LOU Rugby, AG2R La Mondiale) and the french cycling and rowing federations within a French national agency grant project for the Paris 2024 Olympics (THPCA2024)."
+      }
+    ]
+  },
+  {
+    "institution": "École Normale Supérieure de Lyon",
+    "city": "Lyon",
+    "lat": 45.74906,
+    "lng": 4.84789,
+    "country": "FR",
+    "people": [
+      {
+        "firstName": "Jonathan",
+        "lastName": "ENRIQUEZ",
+        "role": "professor",
+        "year": "",
+        "linkedin": "https://www.linkedin.com/in/jonathan-enriquez-471a7bab/",
+        "photo": "jonathan-enriquez.png",
+        "background": "Cell",
+        "biosketch": "Prof. Jonathan Enriquez is group leader at Institute of Functional Genomics of Lyon (IGFL) at the Ecole Normal Supérieure of Lyon (ENSL), France. From 2010 to 2015 Dr Enriquez was postdoctoral Research Scientist at Columbia University, New York. In 2016, he obtained a permanent position at CNRS in France and started his own group in 2017 at IGFL. He uses Drosophila melanogaster to discover new biological concepts and mechanisms of development. His research combines genetics, molecular biology, imaging, post-imaging processing, computational biology, and behavioral approaches."
+      },
+      {
+        "firstName": "Eglantine",
+        "lastName": "HEUDE",
+        "role": "professor",
+        "year": "",
+        "linkedin": "",
+        "photo": "eglantine-heude.jpg",
+        "background": "Cell",
+        "biosketch": "Prof. Eglantine Heude is a permanent CNRS researcher expert in Developmental and Evolutionary Biology. She has just created her team at the “Institut de Génomique Fonctionnelle de Lyon” (ENS de Lyon, September 2024) to develop her own research thematic investigating the developmental and evolutionary origins of tetrapods. Since her PhD, she has focused on the cellular and molecular mechanisms at the origin of a functional and integrated musculoskeletal system in vertebrates. The current research axes combine functional genomics, transcriptomics, comparative embryology and comparative anatomy approaches by studying different conventional and unconventional vertebrate models. Her team seeks to elucidate the morphogenetic bases of morphological innovations and musculoskeletal adaptions to new environments. Eglantine Heude has published 22 papers (citations > 800, H index 17). She is financially supported by the French National Research Agency for young researchers (ANR JCJC)."
+      }
+    ]
+  },
+  {
+    "institution": "King's College London",
+    "city": "London",
+    "lat": 51.50853,
+    "lng": -0.12574,
+    "country": "GB",
+    "people": [
+      {
+        "firstName": "Cameron",
+        "lastName": "HILL",
+        "role": "professor",
+        "year": "",
+        "linkedin": "https://www.linkedin.com/in/cameron-hill-0933a668/",
+        "photo": "cameron-hill.jpg",
+        "background": "Tissue",
+        "biosketch": "Dr Cameron Hill is a postdoctoral research associate at King’s College London, UK, within the Randall Centre for Cell and Molecular Biophysics. Prior to this role, he worked as a research technician in the Structure and Motion Laboratory at the Royal Veterinary College, UK, (2017–2019), where he employed kinematic video analysis, X-ray Reconstruction of Moving Morphology (XROMM), and musculoskeletal robotics to investigate anuran locomotion. Cameron holds a BSc in Sport and Exercise Science from Coventry University, UK, (2011–2014) and completed his PhD at the same institution (2014–2018), examining the effects of ageing and obesity on isometric force, work loop power output, and fatigue resistance of isolated locomotor and respiratory skeletal muscle. His current research uses synchrotron-based, time-resolved small-angle X-ray diffraction to probe the regulatory states of myosin-containing thick filaments and actin-containing thin filaments in skeletal muscle during contraction. This work focuses on phenotypic differences between fast- and slow-twitch muscle across a range of contractile paradigms, including twitch and tetanic contraction, unloaded shortening, active stretch, length-step perturbations, and force–velocity profiling. He is also interested in how disease models, including ageing and obesity, impair contractile function at the cellular level, and in developing strategies to restore muscle performance."
+      }
+    ]
+  },
+  {
+    "institution": "Institut Pasteur",
+    "city": "Paris",
+    "lat": 48.85341,
+    "lng": 2.3488,
+    "country": "FR",
+    "people": [
+      {
+        "firstName": "Glenda",
+        "lastName": "COMAI",
+        "role": "professor",
+        "year": "",
+        "linkedin": "https://www.linkedin.com/in/glenda-comai-152a956b/",
+        "photo": "glenda-comai.jpg",
+        "background": "Cell",
+        "biosketch": "Prof. Glenda Comai is a CNRS permanent researcher at the Stem Cells and Development Unit of Institute Pasteur in Paris. Her current research bridges the developmental biology and stem cells fields with focus on craniofacial muscles. Using 3D-imaging, mouse genetics and single cell/single nuclear omics she seeks to understand how heterogeneity at the level of stem cells and myofibres is established, and how this impacts on muscular genetic disorders. She has a long-term interest in the mechanisms underlying tissue patterning during development."
+      }
+    ]
+  },
+  {
+    "institution": "ETH Zurich",
+    "city": "Zurich",
+    "lat": 47.36667,
+    "lng": 8.55,
+    "country": "CH",
+    "people": [
+      {
+        "firstName": "Katrien",
+        "lastName": "DE BOCK",
+        "role": "professor",
+        "year": "",
+        "linkedin": "https://www.linkedin.com/in/katrien-de-bock-8aa254b3/",
+        "photo": "katrien-debock.jpg",
+        "background": "Tissue",
+        "biosketch": "Prof. Katrien de Bock is a full professor and deputy head of the Department of Health Sciences and Technology at ETH Zürich. The De Bock laboratory focuses its research on investigating how endothelial cells rewire their metabolism during angiogenesis and how endothelial cells metabolically communicate with other cell types in the muscle microenvironment to maintain or establish muscle homeostasis. Specific interest goes to deciphering mechanisms of blood vessel growth and endothelial metabolic crosstalk in the muscle following exercise and/or muscle injury."
+      },
+      {
+        "firstName": "Moritz",
+        "lastName": "MARKWALDER",
+        "role": "student",
+        "year": "2023",
+        "linkedin": "https://www.linkedin.com/in/moritz-markwalder/",
+        "photo": "moritz-markwalder.jpg",
+        "background": "",
+        "biosketch": ""
+      }
+    ]
+  },
+  {
+    "institution": "Université Jean Monnet",
+    "city": "Saint-Etienne",
+    "lat": 45.43389,
+    "lng": 4.39,
+    "country": "FR",
+    "people": [
+      {
+        "firstName": "Laurence",
+        "lastName": "VICO",
+        "role": "professor",
+        "year": "",
+        "linkedin": "https://www.linkedin.com/in/laurence-vico-b169391b/",
+        "photo": "laurence-vico.jpg",
+        "background": "Organism",
+        "biosketch": "Prof. Laurence VICO is a physiologist, Research Director at INSERM, working at Jean Monnet University in Saint-Etienne. She leads the SAINBIOSE Unit (INSERM U1059) which includes two teams, one working on cardiovascular diseases, the other on osteoarticular diseases. Her research themes on the skeletal system encompasses the understanding of the mechanical and metabolic deconditioning occurring in extreme (spaceflight and analogs) or disuse (osteoporosis, inactivity, nutrition disorders) conditions. Such (dys)adaptations encompass intertwined loops leading to bone loss, vascular changes, muscle shift and metabolic alterations. Another target is the effects of pharmaceutical or physical training strategies and their safe and efficient application to frail subjects. Laurence Vico has published more than 300 papers (citations > 8,000, H index 53) and is financially supported by the ANR, the European Agency or the Centre National des Études Spatiales."
+      },
+      {
+        "firstName": "Damien",
+        "lastName": "FREYSSENET",
+        "role": "professor",
+        "year": "",
+        "linkedin": "https://www.linkedin.com/in/damien-freyssenet-79218089/",
+        "photo": "damien-freyssenet.png",
+        "background": "Tissue",
+        "biosketch": "Prof. Damien Freyssenet is an exercise physiologist and biochemist, Professor at Jean Monnet University in Saint-Etienne. He is currently head of the Deconditioning Reconditioning of skeletal Muscle - Systemic Environment research team at the Laboratoire Interuniversitaire de Biologie de la Motricité. Damien Freyssenet's research activity focuses on the mechanisms of skeletal muscle deconditioning under physiological (dry immersion) and pathological (cancer, myopathies, sepsis) conditions, as well as on the development of strategies to limit/prevent this deconditioning. Damien Freyssenet has published 61 papers (citations > 6,000, H index 28). Damien Freyssenet is financially supported by the Association Française contre les Myopathies, the Fondation ARC pour la Recherche sur le Cancer, the Ligue contre le Cancer, or the Centre National des Études Spatiales."
+      },
+      {
+        "firstName": "Alexandre",
+        "lastName": "GENSEL",
+        "role": "student",
+        "year": "2022",
+        "linkedin": "https://www.linkedin.com/in/alexandre-gensel-a489bb267/",
+        "photo": "alexandre-gensel.jpg",
+        "background": "",
+        "biosketch": ""
+      },
+      {
+        "firstName": "Romane",
+        "lastName": "GEREY",
+        "role": "student",
+        "year": "2023",
+        "linkedin": "https://www.linkedin.com/in/romane-gerey-76790924a/",
+        "photo": "romane-gerey.jpg",
+        "background": "",
+        "biosketch": ""
+      },
+      {
+        "firstName": "Aurélie",
+        "lastName": "LALLEMAND",
+        "role": "student",
+        "year": "2024",
+        "linkedin": "https://www.linkedin.com/in/aurelie-lallemand-656a4b294/",
+        "photo": "aurelie-lallemand.jpg",
+        "background": "",
+        "biosketch": ""
+      },
+      {
+        "firstName": "Thomas",
+        "lastName": "MONOT",
+        "role": "student",
+        "year": "2024",
+        "linkedin": "https://www.linkedin.com/in/thomas-monot-50430122a/",
+        "photo": "thomas-monot.jpg",
+        "background": "",
+        "biosketch": ""
+      },
+      {
+        "firstName": "Etienne",
+        "lastName": "DARLES",
+        "role": "student",
+        "year": "2025",
+        "linkedin": "https://www.linkedin.com/in/etiennedarles/",
+        "photo": "etienne-darles.jpg",
+        "background": "",
+        "biosketch": ""
+      },
+      {
+        "firstName": "Sam",
+        "lastName": "GEORGES",
+        "role": "student",
+        "year": "2025",
+        "linkedin": "https://www.linkedin.com/in/sam-georges-7995a3364/",
+        "photo": "default-avatar.jpg",
+        "background": "",
+        "biosketch": ""
+      }
+    ]
+  },
+  {
+    "institution": "Ludwig-Maximilians-Universität München",
+    "city": "Munich",
+    "lat": 48.13743,
+    "lng": 11.57549,
+    "country": "DE",
+    "people": [
+      {
+        "firstName": "Attila",
+        "lastName": "ASZODI",
+        "role": "professor",
+        "year": "",
+        "linkedin": "https://www.linkedin.com/in/attila-aszodi-prof-dr-2532a51/",
+        "photo": "attila-aszodi.jpg",
+        "background": "Cell",
+        "biosketch": "Prof. Attila Aszódi is the scientific coordinator of the Musculoskeletal University Center Munich (MUM) (MUM) and head of the \"Cartilage Development, Diseases, and Regulation\" group at LMU University Hospital in Munich. His research focuses on musculoskeletal tissues, particularly cartilage development, diseases, and regeneration. His main area of interest is identifying the effects of integrin-mediated cell-matrix interactions and Rho GTPase signaling cascades on cartilage physiology and pathophysiology. In addition, he investigates the role of extracellular matrix integrity in regulating the development, function, and regeneration of the skeletal system. His group's research explored the role of beta1 integrins and matrilin family of ECM proteins in joint development and cartilage homeostasis. His laboratory uses a multidisciplinary approach—combining mouse genetics, stem cell biology, and biomechanical studies—to study the processes of cartilage differentiation and repair, with a particular focus on diseases such as osteoarthritis."
+      }
+    ]
+  },
+  {
+    "institution": "Novo Nordisk Foundation Center for Basic Metabolic Research",
+    "city": "Copenhagen",
+    "lat": 55.67594,
+    "lng": 12.56553,
+    "country": "DK",
+    "people": [
+      {
+        "firstName": "Jonas",
+        "lastName": "TREEBAK",
+        "role": "professor",
+        "year": "",
+        "linkedin": "https://www.linkedin.com/in/jonas-thue-treebak-74340841/",
+        "photo": "jonas-treebak.jpg",
+        "background": "Tissue",
+        "biosketch": "My research focuses on defining the molecular and physiological mechanisms by which diet, physical activity, and weight loss improve insulin sensitivity and protect against cardiometabolic diseases. Over the past two decades, I have established a strong research program centered on skeletal muscle biology, inter-organ communication, and the role of NAD⁺ metabolism in metabolic health. My group has pioneered work on NAD⁺ biosynthesis and consumption across multiple tissues, including muscle, liver, adipose tissue, and hypothalamus, revealing critical pathways that maintain tissue function and systemic energy homeostasis."
+      }
+    ]
+  },
+  {
+    "institution": "Université Bourgogne Europe",
+    "city": "Dijon",
+    "lat": 47.31344,
+    "lng": 5.01391,
+    "country": "FR",
+    "people": [
+      {
+        "firstName": "Alain",
+        "lastName": "BOUCHE",
+        "role": "student",
+        "year": "2022",
+        "linkedin": "https://www.linkedin.com/in/alain-bouche-7bb1751a2/",
+        "photo": "alain-bouche.jpg",
+        "background": "Organism",
+        "biosketch": ""
+      },
+      {
+        "firstName": "Marion",
+        "lastName": "BOUVET",
+        "role": "student",
+        "year": "2022",
+        "linkedin": "https://www.linkedin.com/in/marion-bouvet-science/",
+        "photo": "marion-bouvet.jpg",
+        "background": "",
+        "biosketch": ""
+      }
+    ]
+  },
+  {
+    "institution": "Lyon 1 Université",
+    "city": "Villeurbanne",
+    "lat": 45.76601,
+    "lng": 4.8795,
+    "country": "FR",
+    "people": [
+      {
+        "firstName": "Louise",
+        "lastName": "BOURLIER",
+        "role": "student",
+        "year": "2022",
+        "linkedin": "https://www.linkedin.com/in/louise-bourlier-4158a921a/",
+        "photo": "louise-bourlier.jpg",
+        "background": "Organism",
+        "biosketch": ""
+      },
+      {
+        "firstName": "Andrea",
+        "lastName": "EMERIT",
+        "role": "student",
+        "year": "2022",
+        "linkedin": "https://www.linkedin.com/in/andr%C3%A9a-emerit-044413152/",
+        "photo": "andrea-emerit.jpg",
+        "background": "",
+        "biosketch": ""
+      },
+      {
+        "firstName": "Margo",
+        "lastName": "FAVIER",
+        "role": "student",
+        "year": "2022",
+        "linkedin": "https://www.linkedin.com/in/margo-favier-045a3a1a5/",
+        "photo": "margo-favier.jpg",
+        "background": "",
+        "biosketch": ""
+      },
+      {
+        "firstName": "Clotilde",
+        "lastName": "MARTIN",
+        "role": "student",
+        "year": "2022",
+        "linkedin": "https://www.linkedin.com/in/clotilde-martin-22a9a71a3/",
+        "photo": "clotilde-martin.jpg",
+        "background": "",
+        "biosketch": ""
+      },
+      {
+        "firstName": "Estelle",
+        "lastName": "RADICE",
+        "role": "student",
+        "year": "2022",
+        "linkedin": "https://www.linkedin.com/in/estelle-radice-918aa7297/",
+        "photo": "estelle-radice.jpg",
+        "background": "",
+        "biosketch": ""
+      },
+      {
+        "firstName": "Solène",
+        "lastName": "DAUMAS",
+        "role": "student",
+        "year": "2023",
+        "linkedin": "https://www.linkedin.com/in/solene-daumas/",
+        "photo": "solene-daumas.jpg",
+        "background": "",
+        "biosketch": ""
+      },
+      {
+        "firstName": "Adèle",
+        "lastName": "KALFON",
+        "role": "student",
+        "year": "2024",
+        "linkedin": "https://www.linkedin.com/in/ad%C3%A8le-kalfon-a67956380/",
+        "photo": "adele-kalfon.jpg",
+        "background": "",
+        "biosketch": ""
+      },
+      {
+        "firstName": "Ilias",
+        "lastName": "BARSAKIS",
+        "role": "student",
+        "year": "2024",
+        "linkedin": "https://www.linkedin.com/in/ilias-c-barsakis-235b53312/",
+        "photo": "ilias-barsakis.jpg",
+        "background": "",
+        "biosketch": ""
+      },
+      {
+        "firstName": "Clara",
+        "lastName": "CHUZEVILLE",
+        "role": "student",
+        "year": "2025",
+        "linkedin": "https://www.linkedin.com/in/clara-chuzeville-24963a230/",
+        "photo": "clara-chuzeville.jpg",
+        "background": "",
+        "biosketch": ""
+      },
+      {
+        "firstName": "Jade",
+        "lastName": "MARECHAL",
+        "role": "student",
+        "year": "2025",
+        "linkedin": "https://www.linkedin.com/in/jade-mar%C3%A9chal-507ba737b/",
+        "photo": "jade-marechal.jpg",
+        "background": "",
+        "biosketch": ""
+      },
+      {
+        "firstName": "Florian",
+        "lastName": "PERRETTE",
+        "role": "student",
+        "year": "2025",
+        "linkedin": "https://www.linkedin.com/in/florian-perrette-28374a334/",
+        "photo": "florian-perrette.jpg",
+        "background": "",
+        "biosketch": ""
+      },
+      {
+        "firstName": "Ulysse",
+        "lastName": "PORRA",
+        "role": "student",
+        "year": "2025",
+        "linkedin": "https://www.linkedin.com/in/ulysse-porra-256482220/",
+        "photo": "default-avatar.jpg",
+        "background": "",
+        "biosketch": ""
+      },
+      {
+        "firstName": "Lucia",
+        "lastName": "ROUHLING",
+        "role": "student",
+        "year": "2025",
+        "linkedin": "https://www.linkedin.com/in/lucia-rouhling-a936512b8/",
+        "photo": "default-avatar.jpg",
+        "background": "",
+        "biosketch": ""
+      },
+      {
+        "firstName": "Louna",
+        "lastName": "DOUCET",
+        "role": "student",
+        "year": "2026",
+        "linkedin": "https://www.linkedin.com/in/louna-doucet-9025a0347/",
+        "photo": "default-avatar.jpg",
+        "background": "",
+        "biosketch": ""
+      },
+      {
+        "firstName": "Adele",
+        "lastName": "DUROYON",
+        "role": "student",
+        "year": "2026",
+        "linkedin": "https://www.linkedin.com/in/adele-duroyon-b8b593292/",
+        "photo": "adele-duroyon.jpg",
+        "background": "",
+        "biosketch": ""
+      },
+      {
+        "firstName": "Nathan",
+        "lastName": "MEGRET",
+        "role": "student",
+        "year": "2026",
+        "linkedin": "https://www.linkedin.com/in/nathan-megret-a51ba8295/",
+        "photo": "nathan-megret.jpg",
+        "background": "",
+        "biosketch": ""
+      }
+    ]
+  },
+  {
+    "institution": "Institut Supérieur du Sport et de l’Éducation Physique de Sfax",
+    "city": "Sfax",
+    "lat": 34.74056,
+    "lng": 10.76028,
+    "country": "TN",
+    "people": [
+      {
+        "firstName": "Khouloud",
+        "lastName": "CHITIOUI",
+        "role": "student",
+        "year": "2022",
+        "linkedin": "https://www.linkedin.com/in/khouloud-chtioui-8716a2231/",
+        "photo": "khouloud-chitioui.jpg",
+        "background": "",
+        "biosketch": ""
+      }
+    ]
+  },
+  {
+    "institution": "Université de Poitiers",
+    "city": "Poitiers",
+    "lat": 46.58261,
+    "lng": 0.34348,
+    "country": "FR",
+    "people": [
+      {
+        "firstName": "Chloe",
+        "lastName": "ETTOUATI",
+        "role": "student",
+        "year": "2022",
+        "linkedin": "https://www.linkedin.com/in/chlo%C3%A9-ettouati/",
+        "photo": "chloe-ettouati.jpg",
+        "background": "",
+        "biosketch": ""
+      }
+    ]
+  },
+  {
+    "institution": "University of Oregon",
+    "city": "Eugene",
+    "lat": 44.05207,
+    "lng": -123.08675,
+    "country": "US",
+    "people": [
+      {
+        "firstName": "aymeric",
+        "lastName": "FEYFANT",
+        "role": "student",
+        "year": "2022",
+        "linkedin": "https://www.linkedin.com/in/aymericfeyfant/",
+        "photo": "aymeric-feyfant.jpg",
+        "background": "",
+        "biosketch": ""
+      }
+    ]
+  },
+  {
+    "institution": "Aarhus University",
+    "city": "Aarhus",
+    "lat": 56.15674,
+    "lng": 10.21076,
+    "country": "DK",
+    "people": [
+      {
+        "firstName": "Daniel",
+        "lastName": "KRUSE",
+        "role": "student",
+        "year": "2022",
+        "linkedin": "https://www.linkedin.com/in/daniel-zornow-kruse/",
+        "photo": "daniel-kruse.jpg",
+        "background": "",
+        "biosketch": ""
+      }
+    ]
+  },
+  {
+    "institution": "University of Lausanne",
+    "city": "Lausanne",
+    "lat": 46.516,
+    "lng": 6.63282,
+    "country": "CH",
+    "people": [
+      {
+        "firstName": "Clément",
+        "lastName": "LANFRANCHI",
+        "role": "student",
+        "year": "2022",
+        "linkedin": "https://www.linkedin.com/in/cl%C3%A9mentlanfranchi/",
+        "photo": "clement-lanfranchi.jpg",
+        "background": "",
+        "biosketch": ""
+      }
+    ]
+  },
+  {
+    "institution": "Sorbonne Université",
+    "city": "Paris",
+    "lat": 48.85341,
+    "lng": 2.3488,
+    "country": "FR",
+    "people": [
+      {
+        "firstName": "Maëva",
+        "lastName": "ROULLAT",
+        "role": "student",
+        "year": "2022",
+        "linkedin": "https://www.linkedin.com/in/ma%C3%ABva-roullat-/",
+        "photo": "default-avatar.jpg",
+        "background": "",
+        "biosketch": ""
+      }
+    ]
+  },
+  {
+    "institution": "University of Minho",
+    "city": "Braga",
+    "lat": 41.5514,
+    "lng": -8.42311,
+    "country": "PT",
+    "people": [
+      {
+        "firstName": "Margarida",
+        "lastName": "CORTEZ CARVALO",
+        "role": "student",
+        "year": "2023",
+        "linkedin": "",
+        "photo": "default-avatar.jpg",
+        "background": "",
+        "biosketch": ""
+      }
+    ]
+  },
+  {
+    "institution": "Pontificia Universidad Católica de Chile",
+    "city": "Santiago",
+    "lat": -33.45694,
+    "lng": -70.64827,
+    "country": "CL",
+    "people": [
+      {
+        "firstName": "José",
+        "lastName": "DIAZ-MALDONADO",
+        "role": "student",
+        "year": "2023",
+        "linkedin": "https://www.linkedin.com/in/jos%C3%A9-d%C3%ADaz-maldonado-41391933b/",
+        "photo": "jose-diazmaldonado.jpg",
+        "background": "",
+        "biosketch": ""
+      },
+      {
+        "firstName": "Fernanda",
+        "lastName": "BRIONES MANRIQUEZ",
+        "role": "student",
+        "year": "2025",
+        "linkedin": "https://www.linkedin.com/in/fernanda-briones-manriquez-155708365/",
+        "photo": "fernanda-briones.jpg",
+        "background": "",
+        "biosketch": ""
+      }
+    ]
+  },
+  {
+    "institution": "Université Paris-Saclay",
+    "city": "Gif-sur-Yvette",
+    "lat": 48.68333,
+    "lng": 2.13333,
+    "country": "FR",
+    "people": [
+      {
+        "firstName": "Benjamin",
+        "lastName": "DOURRIEU",
+        "role": "student",
+        "year": "2023",
+        "linkedin": "https://www.linkedin.com/in/benjamin-dourrieu-5741a2252/",
+        "photo": "benjamin-dourrieu.jpg",
+        "background": "",
+        "biosketch": ""
+      }
+    ]
+  },
+  {
+    "institution": "Technical University of Munich",
+    "city": "Munich",
+    "lat": 48.13743,
+    "lng": 11.57549,
+    "country": "DE",
+    "people": [
+      {
+        "firstName": "Mika",
+        "lastName": "JACOBS",
+        "role": "student",
+        "year": "2023",
+        "linkedin": "https://www.linkedin.com/in/mika-jos-jacobs-310803298/",
+        "photo": "mika-jacobs.jpg",
+        "background": "",
+        "biosketch": ""
+      },
+      {
+        "firstName": "Dimitrios",
+        "lastName": "KOSSENAKIS",
+        "role": "student",
+        "year": "2023",
+        "linkedin": "https://www.linkedin.com/in/dimitris-kossenakis-41592b206/",
+        "photo": "dimitrios-kossenakis.jpg",
+        "background": "",
+        "biosketch": ""
+      },
+      {
+        "firstName": "Thomas",
+        "lastName": "WÖLKHART",
+        "role": "student",
+        "year": "2023",
+        "linkedin": "https://www.linkedin.com/in/thomas-woelkhart/",
+        "photo": "thomas-wolkhart.jpg",
+        "background": "",
+        "biosketch": ""
+      },
+      {
+        "firstName": "Jule",
+        "lastName": "ZORN",
+        "role": "student",
+        "year": "2023",
+        "linkedin": "https://www.linkedin.com/in/jule-zorn-159454291/",
+        "photo": "jule-zorn.jpg",
+        "background": "",
+        "biosketch": ""
+      },
+      {
+        "firstName": "Felix",
+        "lastName": "BURKERT",
+        "role": "student",
+        "year": "2025",
+        "linkedin": "https://www.linkedin.com/in/felix-b-/",
+        "photo": "default-avatar.jpg",
+        "background": "",
+        "biosketch": ""
+      }
+    ]
+  },
+  {
+    "institution": "École Pratique des Hautes Études",
+    "city": "Paris",
+    "lat": 48.85341,
+    "lng": 2.3488,
+    "country": "FR",
+    "people": [
+      {
+        "firstName": "Pauline",
+        "lastName": "MAURISSENS",
+        "role": "student",
+        "year": "2023",
+        "linkedin": "https://www.linkedin.com/in/pauline-maurissens-a267ab131/",
+        "photo": "pauline-maurissens.jpg",
+        "background": "",
+        "biosketch": ""
+      }
+    ]
+  },
+  {
+    "institution": "Aix-Marseille Université",
+    "city": "Marseille",
+    "lat": 43.29695,
+    "lng": 5.38107,
+    "country": "FR",
+    "people": [
+      {
+        "firstName": "Iris",
+        "lastName": "MICHEL",
+        "role": "student",
+        "year": "2023",
+        "linkedin": "https://www.linkedin.com/in/iris-michel-37a961112/",
+        "photo": "iris-michel.jpg",
+        "background": "",
+        "biosketch": ""
+      },
+      {
+        "firstName": "Robinson",
+        "lastName": "BOUMAZA-VANNEAU",
+        "role": "student",
+        "year": "2024",
+        "linkedin": "https://www.linkedin.com/in/robinson-boumaza-89390425a/",
+        "photo": "default-avatar.jpg",
+        "background": "",
+        "biosketch": ""
+      },
+      {
+        "firstName": "Elsa",
+        "lastName": "BRIAULT",
+        "role": "student",
+        "year": "2024",
+        "linkedin": "https://www.linkedin.com/in/elsa-briault-1b3462295/",
+        "photo": "default-avatar.jpg",
+        "background": "",
+        "biosketch": ""
+      }
+    ]
+  },
+  {
+    "institution": "University of Ottawa",
+    "city": "Ottawa",
+    "lat": 45.41117,
+    "lng": -75.69812,
+    "country": "CA",
+    "people": [
+      {
+        "firstName": "Natasha",
+        "lastName": "STRONG",
+        "role": "student",
+        "year": "2023",
+        "linkedin": "https://www.linkedin.com/in/natasha-strong-770769235/",
+        "photo": "default-avatar.jpg",
+        "background": "",
+        "biosketch": ""
+      },
+      {
+        "firstName": "Daniel Felipe",
+        "lastName": "CACERES SEPULVEDA",
+        "role": "student",
+        "year": "2024",
+        "linkedin": "https://www.linkedin.com/in/daniel-caceres-7932431a7/",
+        "photo": "daniel-caceres.jpg",
+        "background": "",
+        "biosketch": ""
+      },
+      {
+        "firstName": "Melissa",
+        "lastName": "GOURLAY",
+        "role": "student",
+        "year": "2024",
+        "linkedin": "https://www.linkedin.com/in/melissa-gourlay-403b54171/",
+        "photo": "default-avatar.jpg",
+        "background": "",
+        "biosketch": ""
+      },
+      {
+        "firstName": "Olivia",
+        "lastName": "SOMMERS",
+        "role": "student",
+        "year": "2024",
+        "linkedin": "https://www.linkedin.com/in/olivia-sommers-29197b274/",
+        "photo": "olivia-sommers.jpg",
+        "background": "",
+        "biosketch": ""
+      },
+      {
+        "firstName": "Rholls",
+        "lastName": "TOMSINE",
+        "role": "student",
+        "year": "2024",
+        "linkedin": "https://www.linkedin.com/in/rholls-tomsine-300b27209/",
+        "photo": "rholls-tomsine.jpg",
+        "background": "",
+        "biosketch": ""
+      },
+      {
+        "firstName": "Anthony",
+        "lastName": "ZIADEH",
+        "role": "student",
+        "year": "2024",
+        "linkedin": "https://www.linkedin.com/in/anthony-ziadeh/",
+        "photo": "anthony-ziadeh.jpg",
+        "background": "",
+        "biosketch": ""
+      },
+      {
+        "firstName": "Nika",
+        "lastName": "ABEDIAN",
+        "role": "student",
+        "year": "2026",
+        "linkedin": "https://www.linkedin.com/in/nika-abedian-28483b346/",
+        "photo": "default-avatar.jpg",
+        "background": "",
+        "biosketch": ""
+      },
+      {
+        "firstName": "Grace",
+        "lastName": "STOCKER",
+        "role": "student",
+        "year": "2026",
+        "linkedin": "https://www.linkedin.com/in/grace-stocker-894b8a214/",
+        "photo": "grace-stocker.jpg",
+        "background": "",
+        "biosketch": ""
+      }
+    ]
+  },
+  {
+    "institution": "Université Paris Cité",
+    "city": "Paris",
+    "lat": 48.85341,
+    "lng": 2.3488,
+    "country": "FR",
+    "people": [
+      {
+        "firstName": "Yanis",
+        "lastName": "ZAOUI",
+        "role": "student",
+        "year": "2023",
+        "linkedin": "https://www.linkedin.com/in/yanis-zaoui-a9327019a/",
+        "photo": "yanis-zaoui.jpg",
+        "background": "",
+        "biosketch": ""
+      }
+    ]
+  },
+  {
+    "institution": "Northumbria University",
+    "city": "Newcastle upon Tyne",
+    "lat": 54.97328,
+    "lng": -1.61396,
+    "country": "GB",
+    "people": [
+      {
+        "firstName": "Atene",
+        "lastName": "ZUKOVAITE",
+        "role": "student",
+        "year": "2023",
+        "linkedin": "https://www.linkedin.com/in/at%C4%97n%C4%97-%C5%BEukovait%C4%97-anutr-321a67204/",
+        "photo": "atene-zukovaite.jpg",
+        "background": "",
+        "biosketch": ""
+      }
+    ]
+  },
+  {
+    "institution": "Lebanese University",
+    "city": "Beirut",
+    "lat": 33.89332,
+    "lng": 35.50157,
+    "country": "LB",
+    "people": [
+      {
+        "firstName": "Rama",
+        "lastName": "AL-JINANI",
+        "role": "student",
+        "year": "2024",
+        "linkedin": "https://www.linkedin.com/in/rama-al-jinani-65869029a/",
+        "photo": "default-avatar.jpg",
+        "background": "",
+        "biosketch": ""
+      },
+      {
+        "firstName": "Anthony",
+        "lastName": "HADDAD",
+        "role": "student",
+        "year": "2024",
+        "linkedin": "https://www.linkedin.com/in/anthonyhaddad22/",
+        "photo": "anthony-haddad.jpg",
+        "background": "",
+        "biosketch": ""
+      },
+      {
+        "firstName": "Véra",
+        "lastName": "JRADI",
+        "role": "student",
+        "year": "2024",
+        "linkedin": "https://www.linkedin.com/in/vera-jradi-144b93310/",
+        "photo": "default-avatar.jpg",
+        "background": "",
+        "biosketch": ""
+      }
+    ]
+  },
+  {
+    "institution": "Université Paris-Est Créteil",
+    "city": "Créteil",
+    "lat": 48.79266,
+    "lng": 2.46569,
+    "country": "FR",
+    "people": [
+      {
+        "firstName": "Anaïs",
+        "lastName": "BACKLAND",
+        "role": "student",
+        "year": "2024",
+        "linkedin": "https://www.linkedin.com/in/ana%C3%AFs-backland-84836a298/",
+        "photo": "default-avatar.jpg",
+        "background": "",
+        "biosketch": ""
+      }
+    ]
+  },
+  {
+    "institution": "University of Thessaly",
+    "city": "Volos",
+    "lat": 39.36923,
+    "lng": 22.94769,
+    "country": "GR",
+    "people": [
+      {
+        "firstName": "Ioanna",
+        "lastName": "BERIATOU",
+        "role": "student",
+        "year": "2024",
+        "linkedin": "https://www.linkedin.com/in/ioanna-beriatou-86a0012b1/",
+        "photo": "ioanna-beriatou.jpg",
+        "background": "",
+        "biosketch": ""
+      },
+      {
+        "firstName": "Anastasia",
+        "lastName": "KAISI",
+        "role": "student",
+        "year": "2026",
+        "linkedin": "https://www.linkedin.com/in/anastasia-kaisi-320214289/",
+        "photo": "anastasia-kaisi.jpg",
+        "background": "",
+        "biosketch": ""
+      }
+    ]
+  },
+  {
+    "institution": "University of Turin",
+    "city": "Turin",
+    "lat": 45.07049,
+    "lng": 7.68682,
+    "country": "IT",
+    "people": [
+      {
+        "firstName": "Camilla",
+        "lastName": "LEPORACE",
+        "role": "student",
+        "year": "2024",
+        "linkedin": "https://www.linkedin.com/in/camilla-leporace-2976b6306/",
+        "photo": "camilla-leporace.jpg",
+        "background": "",
+        "biosketch": ""
+      },
+      {
+        "firstName": "Giada",
+        "lastName": "AQUILINO",
+        "role": "student",
+        "year": "2026",
+        "linkedin": "https://www.linkedin.com/in/giada-aquilino-9117553b9/",
+        "photo": "default-avatar.jpg",
+        "background": "",
+        "biosketch": ""
+      }
+    ]
+  },
+  {
+    "institution": "University of Stirling",
+    "city": "Stirling",
+    "lat": 56.11903,
+    "lng": -3.93682,
+    "country": "GB",
+    "people": [
+      {
+        "firstName": "Thomas",
+        "lastName": "SCOTT",
+        "role": "student",
+        "year": "2024",
+        "linkedin": "https://www.linkedin.com/in/thomas-scott-53795026a/",
+        "photo": "thomas-scott.jpg",
+        "background": "",
+        "biosketch": ""
+      }
+    ]
+  },
+  {
+    "institution": "University of Tsukuba",
+    "city": "Tsukuba",
+    "lat": 36.08333,
+    "lng": 140.11667,
+    "country": "JP",
+    "people": [
+      {
+        "firstName": "Masato",
+        "lastName": "WATANABE",
+        "role": "student",
+        "year": "2024",
+        "linkedin": "",
+        "photo": "default-avatar.jpg",
+        "background": "",
+        "biosketch": ""
+      }
+    ]
+  },
+  {
+    "institution": "Universidad de Granada",
+    "city": "Granada",
+    "lat": 37.18817,
+    "lng": -3.60667,
+    "country": "ES",
+    "people": [
+      {
+        "firstName": "Maria",
+        "lastName": "CARRETERO FERNANDEZ",
+        "role": "student",
+        "year": "2025",
+        "linkedin": "https://www.linkedin.com/in/mar%C3%ADa-carretero-fern%C3%A1ndez-99266a2b7/",
+        "photo": "marioa-carretero.jpg",
+        "background": "",
+        "biosketch": ""
+      }
+    ]
+  },
+  {
+    "institution": "University of Milano-Bicocca",
+    "city": "Milan",
+    "lat": 45.46427,
+    "lng": 9.18951,
+    "country": "IT",
+    "people": [
+      {
+        "firstName": "Georgiana Maria",
+        "lastName": "COSTANDACHE",
+        "role": "student",
+        "year": "2025",
+        "linkedin": "https://www.linkedin.com/in/georgiana-costandache-1a5757314/",
+        "photo": "georgiana-costandache.jpg",
+        "background": "",
+        "biosketch": ""
+      }
+    ]
+  },
+  {
+    "institution": "Universidad Francisco de Vitoria",
+    "city": "Pozuelo de Alarcón",
+    "lat": 40.43293,
+    "lng": -3.81338,
+    "country": "ES",
+    "people": [
+      {
+        "firstName": "Nora",
+        "lastName": "HERNANDEZ",
+        "role": "student",
+        "year": "2025",
+        "linkedin": "https://www.linkedin.com/in/norahernandezmontalvo/",
+        "photo": "nora-hernandez.jpg",
+        "background": "",
+        "biosketch": ""
+      }
+    ]
+  },
+  {
+    "institution": "University of Wrocław",
+    "city": "Wroclaw",
+    "lat": 51.1,
+    "lng": 17.03333,
+    "country": "PL",
+    "people": [
+      {
+        "firstName": "Marina",
+        "lastName": "KARANEUSKAYA",
+        "role": "student",
+        "year": "2025",
+        "linkedin": "https://www.linkedin.com/in/marina-karaniewska-204703247/",
+        "photo": "default-avatar.jpg",
+        "background": "",
+        "biosketch": ""
+      }
+    ]
+  },
+  {
+    "institution": "Krakow University of Economics",
+    "city": "Krakow",
+    "lat": 50.06143,
+    "lng": 19.93658,
+    "country": "PL",
+    "people": [
+      {
+        "firstName": "Monika",
+        "lastName": "MLOSTEK",
+        "role": "student",
+        "year": "2025",
+        "linkedin": "https://www.linkedin.com/in/monika-mlostek-aab717176/",
+        "photo": "monika-mlostek.jpg",
+        "background": "",
+        "biosketch": ""
+      }
+    ]
+  },
+  {
+    "institution": "Universidad Andrés Bello",
+    "city": "Santiago",
+    "lat": -33.45694,
+    "lng": -70.64827,
+    "country": "CL",
+    "people": [
+      {
+        "firstName": "Gerson",
+        "lastName": "NEGUIMAN",
+        "role": "student",
+        "year": "2025",
+        "linkedin": "https://www.linkedin.com/in/gerson-nicol%C3%A1s-neguiman-nahuel-3b55572b4/",
+        "photo": "gerson-neguiman.jpg",
+        "background": "",
+        "biosketch": ""
+      }
+    ]
+  },
+  {
+    "institution": "Université de Strasbourg",
+    "city": "Strasbourg",
+    "lat": 48.58392,
+    "lng": 7.74553,
+    "country": "FR",
+    "people": [
+      {
+        "firstName": "Alexandre",
+        "lastName": "SHARIFI TAFRESHI",
+        "role": "student",
+        "year": "2025",
+        "linkedin": "https://www.linkedin.com/in/alexandre-sharifi-tafreshi/",
+        "photo": "alexandre-sharifi.jpg",
+        "background": "",
+        "biosketch": ""
+      }
+    ]
+  },
+  {
+    "institution": "University of Belgrade",
+    "city": "Belgrade",
+    "lat": 44.80401,
+    "lng": 20.46513,
+    "country": "RS",
+    "people": [
+      {
+        "firstName": "Valentina",
+        "lastName": "VALKA",
+        "role": "student",
+        "year": "2025",
+        "linkedin": "https://www.linkedin.com/in/valentinasjenicic/",
+        "photo": "valentina-valka.jpg",
+        "background": "",
+        "biosketch": ""
+      },
+      {
+        "firstName": "Andrej",
+        "lastName": "RUZIC",
+        "role": "student",
+        "year": "2026",
+        "linkedin": "https://www.linkedin.com/in/andrej-ru%C5%BEi%C4%87-6024032a0/",
+        "photo": "andrej-ruzic.jpg",
+        "background": "",
+        "biosketch": ""
+      }
+    ]
+  },
+  {
+    "institution": "University of Copenhagen",
+    "city": "Copenhagen",
+    "lat": 55.67594,
+    "lng": 12.56553,
+    "country": "DK",
+    "people": [
+      {
+        "firstName": "Firdawss",
+        "lastName": "ABACHRI",
+        "role": "student",
+        "year": "2026",
+        "linkedin": "https://www.linkedin.com/in/firdawss-abachri-ab7b30320/",
+        "photo": "default-avatar.jpg",
+        "background": "",
+        "biosketch": ""
+      }
+    ]
+  },
+  {
+    "institution": "University of Stuttgart",
+    "city": "Stuttgart",
+    "lat": 48.78232,
+    "lng": 9.17702,
+    "country": "DE",
+    "people": [
+      {
+        "firstName": "Anika",
+        "lastName": "BEHRENDT",
+        "role": "student",
+        "year": "2026",
+        "linkedin": "https://www.linkedin.com/in/anika-behrendt-760b04330/",
+        "photo": "default-avatar.jpg",
+        "background": "",
+        "biosketch": ""
+      }
+    ]
+  },
+  {
+    "institution": "Medical University of Lublin",
+    "city": "Lublin",
+    "lat": 51.25,
+    "lng": 22.56667,
+    "country": "PL",
+    "people": [
+      {
+        "firstName": "Sylwia",
+        "lastName": "DRZEWIECKA",
+        "role": "student",
+        "year": "2026",
+        "linkedin": "https://www.linkedin.com/in/sylwia-drzewiecka/",
+        "photo": "sylwia-drzewiecka.jpg",
+        "background": "",
+        "biosketch": ""
+      }
+    ]
+  },
+  {
+    "institution": "The University of Queensland",
+    "city": "Brisbane",
+    "lat": -27.46794,
+    "lng": 153.02809,
+    "country": "AU",
+    "people": [
+      {
+        "firstName": "Ella",
+        "lastName": "HOCKAM",
+        "role": "student",
+        "year": "2026",
+        "linkedin": "https://www.linkedin.com/in/ella-hockam-b0433923a/",
+        "photo": "ella-hockam.jpg",
+        "background": "",
+        "biosketch": ""
+      }
+    ]
+  },
+  {
+    "institution": "University of Padua",
+    "city": "Padua",
+    "lat": 45.40797,
+    "lng": 11.88586,
+    "country": "IT",
+    "people": [
+      {
+        "firstName": "Mina",
+        "lastName": "MILOSAVLJEVIC",
+        "role": "student",
+        "year": "2026",
+        "linkedin": "https://www.linkedin.com/in/mina-milosavljevic-06a4303a7/",
+        "photo": "mina-milosavljevic.jpg",
+        "background": "",
+        "biosketch": ""
+      },
+      {
+        "firstName": "Ella",
+        "lastName": "NOLAN",
+        "role": "student",
+        "year": "2026",
+        "linkedin": "https://www.linkedin.com/in/ella-k-nolan/",
+        "photo": "ella-nolan.jpg",
+        "background": "",
+        "biosketch": ""
+      }
+    ]
+  },
+  {
+    "institution": "Sapienza University of Rome",
+    "city": "Rome",
+    "lat": 41.89193,
+    "lng": 12.51133,
+    "country": "IT",
+    "people": [
+      {
+        "firstName": "Dalila",
+        "lastName": "ORLANDO",
+        "role": "student",
+        "year": "2026",
+        "linkedin": "https://www.linkedin.com/in/dalila-orlando-b050401b8/",
+        "photo": "default-avatar.jpg",
+        "background": "",
+        "biosketch": ""
+      }
+    ]
+  },
+  {
+    "institution": "York University",
+    "city": "York",
+    "lat": 40.86807,
+    "lng": -97.592,
+    "country": "US",
+    "people": [
+      {
+        "firstName": "Quinn",
+        "lastName": "STEELE",
+        "role": "student",
+        "year": "2026",
+        "linkedin": "https://www.linkedin.com/in/steele-quinn/",
+        "photo": "quinn-steele.jpg",
+        "background": "",
+        "biosketch": ""
+      },
+      {
+        "firstName": "Alireza",
+        "lastName": "VAZIRI",
+        "role": "student",
+        "year": "2026",
+        "linkedin": "https://www.linkedin.com/in/alireza-vaziri-2a0a7020b/",
+        "photo": "alireza-vaziri.jpg",
+        "background": "",
+        "biosketch": ""
+      }
+    ]
+  },
+  {
+    "institution": "National Institute of Applied Science and Technology",
+    "city": "Tunis",
+    "lat": 36.81897,
+    "lng": 10.16579,
+    "country": "TN",
+    "people": [
+      {
+        "firstName": "Khouloud",
+        "lastName": "SWALMI",
+        "role": "student",
+        "year": "2026",
+        "linkedin": "https://www.linkedin.com/in/khouloud-swalmi-833076236/",
+        "photo": "khouloud-swalmi.jpg",
+        "background": "",
+        "biosketch": ""
+      }
+    ]
+  }
+]

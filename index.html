@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muskle Map Widget Test</title>
+    
+    <link href="https://unpkg.com/maplibre-gl@5.23.0/dist/maplibre-gl.css" rel="stylesheet" />
+    <script src="https://unpkg.com/maplibre-gl@5.23.0/dist/maplibre-gl.js"></script>
+
+    <style>
+        body { font-family: system-ui, sans-serif; padding: 20px; background: #f4f4f5; }
+        .container { max-width: 1000px; margin: 0 auto; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <muskle-map data-url="./data.json"></muskle-map>
+    </div>
+
+    <script type="module" src="./src/widget.js"></script>
+
+</body>
+</html>
