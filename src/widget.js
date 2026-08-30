@@ -1,14 +1,13 @@
 class MuskleMap extends HTMLElement {
     connectedCallback() {
-        this.showStudents = true;
-        this.showProfessors = true;
+        this.viewMode = 'global'; 
+        this.activeFilter = 'all'; 
         this.selectedCohort = 'all';
-        this.selectedBackground = 'all';
+        
         this.map = null;
         this.institutions = [];
         this.visibleCities = [];
         this.availableYears = new Set();
-        this.availableBackgrounds = new Set();
         this.currentIndex = -1;
         this.hoverPopup = new maplibregl.Popup({ closeButton: false, closeOnClick: false, offset: 15 });
         
@@ -22,55 +21,55 @@ class MuskleMap extends HTMLElement {
 
         this.innerHTML = `
             <style>
-                .muskle-map-wrapper { font-family: 'Montserrat', system-ui, sans-serif; max-width: 1200px; margin: 0 auto; color: #111827; }
+                :host { display: block; width: 100%; }
+                .muskle-map-wrapper { font-family: 'Montserrat', system-ui, sans-serif; max-width: 1600px; width: 96%; margin: 0 auto; color: #111827; }
                 
                 .muskle-header-container { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; gap: 16px; flex-wrap: wrap; }
                 .muskle-header-title { margin: 0; font-size: clamp(20px, 4vw + 0.5rem, 26px); font-weight: 700; color: #111827; letter-spacing: -0.5px; line-height: 1.2; }
                 
-                .muskle-split-container {
-                    display: grid;
-                    grid-template-columns: 1.3fr 1fr;
-                    gap: 24px;
-                    height: clamp(600px, 75vh, 900px);
+                .muskle-controls-wrapper { margin-bottom: 24px; display: flex; flex-direction: column; gap: 12px; }
+                .muskle-pills-row { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding-bottom: 4px; }
+                .muskle-pills-row::-webkit-scrollbar { display: none; }
+                .muskle-pill { 
+                    white-space: nowrap; padding: 8px 16px; border-radius: 20px; border: 1px solid #e5e7eb; 
+                    background: #ffffff; cursor: pointer; transition: all 0.2s; 
+                    font-family: inherit; font-weight: 600; font-size: 13px; color: #475569; 
+                    display: flex; align-items: center; gap: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.02);
                 }
+                .muskle-pill:hover { background: #f8fafc; border-color: #cbd5e1; }
+                .muskle-pill.active { background: #111827; color: #ffffff; border-color: #111827; }
+                .muskle-pill.active .pill-dot { border-color: #ffffff !important; }
+                .pill-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+
+                .muskle-sub-controls { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
                 
-                .muskle-map-box {
-                    height: 100%; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-                    overflow: hidden; background: radial-gradient(circle at 50% 50%, #1e293b 0%, #000000 100%);
-                }
+                .muskle-split-container { display: grid; grid-template-columns: 1.3fr 1fr; gap: 24px; height: clamp(600px, 75vh, 900px); }
+                .muskle-map-box { height: 100%; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); overflow: hidden; background: radial-gradient(circle at 50% 50%, #1e293b 0%, #000000 100%); }
                 .muskle-map-viewport { width: 100%; height: 100%; }
                 
-                .muskle-panel-box {
-                    border-radius: 16px; background: #ffffff; border: 1px solid #e5e7eb;
-                    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-                    height: 100%; display: flex; flex-direction: column; overflow-y: auto;
-                    position: relative;
-                }
-                
+                .muskle-panel-box { border-radius: 16px; background: #ffffff; border: 1px solid #e5e7eb; box-shadow: 0 10px 30px rgba(0,0,0,0.08); height: 100%; display: flex; flex-direction: column; overflow-y: auto; position: relative; }
                 .muskle-panel-box::-webkit-scrollbar { width: 6px; }
                 .muskle-panel-box::-webkit-scrollbar-track { background: transparent; }
                 .muskle-panel-box::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 6px; }
                 .muskle-panel-box::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
                 
-                .muskle-profile-card {
-                    background: #ffffff; padding: 24px; border-radius: 16px; border: 1px solid #e5e7eb;
-                    display: flex; flex-direction: column; gap: 16px;
-                    box-shadow: 0 4px 15px rgba(0,0,0,0.03); transition: transform 0.3s ease, box-shadow 0.3s ease;
-                }
-                .muskle-profile-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.08); }
-                
+                .muskle-profile-card { background: #ffffff; padding: 24px 0; border-bottom: 1px solid #f3f4f6; display: flex; flex-direction: column; gap: 16px; }
+                .muskle-profile-card:last-child { border-bottom: none; }
                 .muskle-profile-header { display: flex; align-items: flex-start; gap: 24px; width: 100%; }
-                .muskle-profile-avatar { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; background: #f3f4f6; flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+                .muskle-profile-avatar { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; background: #f3f4f6; flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
                 .muskle-profile-details { flex: 1; min-width: 0; display: flex; flex-direction: column; }
                 .muskle-profile-name { margin: 0 0 4px 0; font-size: 20px; font-weight: 700; color: #1B365D; letter-spacing: -0.5px; word-wrap: break-word; }
-                .muskle-profile-inst { font-size: 13px; font-weight: 500; color: #1B365D; margin-bottom: 8px; word-wrap: break-word; line-height: 1.4; }
+                .muskle-profile-inst { font-size: 13px; font-weight: 500; color: #64748b; margin-bottom: 8px; word-wrap: break-word; line-height: 1.4; }
                 .muskle-profile-tags { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; flex-wrap: wrap; }
                 .muskle-profile-body { width: 100%; }
                 
                 @media (max-width: 900px) {
-                    .muskle-split-container { display: flex; flex-direction: column; height: auto; }
-                    .muskle-map-box { height: clamp(300px, 45vh, 550px); width: 100%; }
-                    .muskle-panel-box { height: auto; overflow: visible; }
+                    .muskle-map-wrapper { width: 100%; padding: 0; }
+                    .muskle-header-container, .muskle-controls-wrapper { padding: 0 16px; }
+                    .muskle-split-container { display: flex; flex-direction: column; height: auto; gap: 0; }
+                    
+                    .muskle-map-box { height: clamp(300px, 45vh, 550px); width: 100%; border-radius: 0; box-shadow: none; }
+                    .muskle-panel-box { height: auto; overflow: visible; border-radius: 0; border-left: none; border-right: none; border-bottom: none; box-shadow: none; }
                     
                     .muskle-profile-header { flex-direction: column; align-items: center; text-align: center; gap: 16px; }
                     .muskle-profile-details { align-items: center; }
@@ -83,36 +82,34 @@ class MuskleMap extends HTMLElement {
             <div class="muskle-map-wrapper">
                 <div class="muskle-header-container">
                     <h2 class="muskle-header-title">Summer School Network</h2>
+                </div>
+
+                <div class="muskle-controls-wrapper">
+                    <div class="muskle-pills-row" id="mode-selector">
+                        <button class="muskle-pill active" data-mode="global">🌐 Global View</button>
+                        <button class="muskle-pill" data-mode="background">🔬 By Background</button>
+                        <button class="muskle-pill" data-mode="role">🎓 By Role</button>
+                    </div>
                     
-                    <div style="position: relative;">
-                        <button id="btn-toggle-filters" style="display: flex; align-items: center; gap: 8px; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 20px; padding: 10px 16px; cursor: pointer; font-size: 14px; font-weight: 600; color: #1B365D; box-shadow: 0 2px 4px rgba(0,0,0,0.05); transition: all 0.2s;">
-                            <svg style="width: 18px; height: 18px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path></svg>
-                            Filters
-                        </button>
-                        
-                        <div id="filter-dropdown" style="display: none; position: absolute; right: 0; top: calc(100% + 10px); background: #ffffff; border: 1px solid #e5e7eb; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 260px; padding: 20px; z-index: 10;">
-                            <h4 style="margin: 0 0 12px 0; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #6b7280;">Role</h4>
-                            <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px;">
-                                <label style="cursor: pointer; font-size: 14px; font-weight: 500; display: flex; align-items: center; gap: 10px;">
-                                    <input type="checkbox" id="filter-students" checked style="width:16px; height:16px; accent-color:#F2A900; cursor:pointer;">
-                                    <span style="width: 12px; height: 12px; border-radius: 50%; background: #F2A900; display: inline-block;"></span>
-                                    Students
-                                </label>
-                                <label style="cursor: pointer; font-size: 14px; font-weight: 500; display: flex; align-items: center; gap: 10px;">
-                                    <input type="checkbox" id="filter-professors" checked style="width:16px; height:16px; accent-color:#1B365D; cursor:pointer;">
-                                    <span style="width: 12px; height: 12px; border-radius: 50%; background: #1B365D; display: inline-block;"></span>
-                                    Professors
-                                </label>
-                            </div>
-                            <h4 style="margin: 0 0 12px 0; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #6b7280;">Background</h4>
-                            <select id="filter-background" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #d1d5db; font-size: 14px; font-family: inherit; color: #111827; background: #f9fafb; outline: none; cursor: pointer; margin-bottom: 20px;">
-                                <option value="all">All Backgrounds</option>
-                            </select>
-                            <h4 style="margin: 0 0 12px 0; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #6b7280;">Cohort Year</h4>
-                            <select id="filter-cohort" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #d1d5db; font-size: 14px; font-family: inherit; color: #111827; background: #f9fafb; outline: none; cursor: pointer;">
-                                <option value="all">All Cohorts</option>
-                            </select>
+                    <div class="muskle-sub-controls">
+                        <div class="muskle-pills-row sub-tabs" id="tabs-background" style="display: none;">
+                            <button class="muskle-pill active" data-filter="all">All</button>
+                            <button class="muskle-pill" data-filter="cell"><span class="pill-dot" style="background:#ea580c"></span>Cell</button>
+                            <button class="muskle-pill" data-filter="tissue"><span class="pill-dot" style="background:#eab308"></span>Tissue</button>
+                            <button class="muskle-pill" data-filter="organism"><span class="pill-dot" style="background:#38bdf8"></span>Organism</button>
                         </div>
+
+                        <div class="muskle-pills-row sub-tabs" id="tabs-role" style="display: none;">
+                            <button class="muskle-pill active" data-filter="all">All</button>
+                            <button class="muskle-pill" data-filter="professor"><span class="pill-dot" style="background:#1d4ed8; border:1px solid #fff"></span>Professors</button>
+                            <button class="muskle-pill" data-filter="student"><span class="pill-dot" style="background:#bae6fd; border:1px solid #0284c7"></span>Students</button>
+                        </div>
+                        
+                        <div class="sub-tabs" id="tabs-global" style="display: block; width: 10px;"></div>
+
+                        <select id="filter-cohort" class="muskle-pill" style="outline: none; padding-right: 32px; background-image: url('data:image/svg+xml;utf8,<svg fill=%22none%22 stroke=%22%23475569%22 viewBox=%220 0 24 24%22 xmlns=%22http://www.w3.org/2000/svg%22><path stroke-linecap=%22round%22 stroke-linejoin=%22round%22 stroke-width=%222%22 d=%22M19 9l-7 7-7-7%22></path></svg>'); background-repeat: no-repeat; background-position: right 12px center; background-size: 14px; appearance: none; -webkit-appearance: none;">
+                            <option value="all">📅 All Cohorts</option>
+                        </select>
                     </div>
                 </div>
 
@@ -130,7 +127,7 @@ class MuskleMap extends HTMLElement {
                         </div>
 
                         <div id="info-active" style="display: none; flex-direction: column;">
-                            <div style="position: sticky; top: 0; z-index: 5; display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid #f3f4f6; background: rgba(249, 250, 251, 0.95); backdrop-filter: blur(4px);">
+                            <div style="position: sticky; top: 0; z-index: 5; display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid #f3f4f6; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(4px);">
                                 <button id="btn-prev" style="width: 40px; height: 40px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 50%; cursor: pointer; color: #1B365D; box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: all 0.2s;">
                                     <svg style="width: 20px; height: 20px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
                                 </button>
@@ -144,7 +141,7 @@ class MuskleMap extends HTMLElement {
                                     </button>
                                 </div>
                             </div>
-                            <div id="info-content" style="padding: 24px 20px; display: flex; flex-direction: column; gap: 20px;"></div>
+                            <div id="info-content" style="padding: 10px 24px 30px 24px; display: flex; flex-direction: column;"></div>
                         </div>
                     </div>
                 </div>
@@ -156,40 +153,39 @@ class MuskleMap extends HTMLElement {
     }
 
     setupInteractions() {
-        const btnToggle = this.querySelector('#btn-toggle-filters');
-        const dropdown = this.querySelector('#filter-dropdown');
+        const modeButtons = this.querySelectorAll('#mode-selector .muskle-pill');
+        modeButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                modeButtons.forEach(b => b.classList.remove('active'));
+                e.currentTarget.classList.add('active');
+                
+                this.viewMode = e.currentTarget.dataset.mode;
+                this.activeFilter = 'all'; 
+                
+                this.querySelectorAll('.sub-tabs').forEach(el => el.style.display = 'none');
+                this.querySelector(`#tabs-${this.viewMode}`).style.display = 'flex';
+                
+                this.querySelectorAll('.sub-tabs .muskle-pill').forEach(b => b.classList.remove('active'));
+                this.querySelectorAll(`.sub-tabs#tabs-${this.viewMode} .muskle-pill[data-filter="all"]`).forEach(b => b.classList.add('active'));
 
-        btnToggle.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const isVisible = dropdown.style.display === 'block';
-            dropdown.style.display = isVisible ? 'none' : 'block';
-            btnToggle.style.background = isVisible ? '#ffffff' : '#f3f4f6';
+                this.updateData();
+            });
         });
 
-        document.addEventListener('click', (e) => {
-            if (!dropdown.contains(e.target) && e.target !== btnToggle) {
-                dropdown.style.display = 'none';
-                btnToggle.style.background = '#ffffff';
-            }
-        });
-
-        this.querySelector('#filter-students').addEventListener('change', (e) => {
-            this.showStudents = e.target.checked;
-            this.updateData();
-        });
-
-        this.querySelector('#filter-professors').addEventListener('change', (e) => {
-            this.showProfessors = e.target.checked;
-            this.updateData();
+        const filterButtons = this.querySelectorAll('.sub-tabs .muskle-pill');
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const parent = e.currentTarget.parentElement;
+                parent.querySelectorAll('.muskle-pill').forEach(b => b.classList.remove('active'));
+                e.currentTarget.classList.add('active');
+                
+                this.activeFilter = e.currentTarget.dataset.filter;
+                this.updateData();
+            });
         });
 
         this.querySelector('#filter-cohort').addEventListener('change', (e) => {
             this.selectedCohort = e.target.value;
-            this.updateData();
-        });
-
-        this.querySelector('#filter-background').addEventListener('change', (e) => {
-            this.selectedBackground = e.target.value;
             this.updateData();
         });
 
@@ -214,7 +210,6 @@ class MuskleMap extends HTMLElement {
     async initMap() {
         const container = this.querySelector('#muskle-map-container');
         const minDimension = Math.min(container.clientWidth || 600, container.clientHeight || 600);
-        // Adjusted the base offset (+0.8 instead of -0.2) to make the globe fill the viewport better
         this.baseZoom = Math.max(0.5, Math.log2(minDimension / 512) + 0.8);
 
         this.map = new maplibregl.Map({
@@ -239,9 +234,7 @@ class MuskleMap extends HTMLElement {
         this.map.on('mouseup', () => { this.userInteracting = false; });
         this.map.on('touchend', () => { this.userInteracting = false; });
 
-        this.map.on('zoom', () => {
-            requestAnimationFrame(() => this.renderClusters());
-        });
+        this.map.on('zoom', () => { requestAnimationFrame(() => this.renderClusters()); });
 
         const dataUrl = this.getAttribute('data-url') || './data.json';
         try {
@@ -250,8 +243,12 @@ class MuskleMap extends HTMLElement {
             
             this.institutions.forEach(inst => {
                 inst.people.forEach(person => {
-                    if (person.year) this.availableYears.add(person.year);
-                    if (person.background) this.availableBackgrounds.add(person.background);
+                    // Extraction de toutes les années uniques
+                    if (Array.isArray(person.year)) {
+                        person.year.forEach(y => {
+                            if (y) this.availableYears.add(y);
+                        });
+                    }
                 });
             });
             this.populateSelects();
@@ -261,9 +258,7 @@ class MuskleMap extends HTMLElement {
                 this.updateData();
                 this.spinGlobe(); 
             });
-        } catch (error) {
-            console.error("Error loading map data:", error);
-        }
+        } catch (error) { console.error("Error loading map data:", error); }
     }
 
     populateSelects() {
@@ -272,17 +267,8 @@ class MuskleMap extends HTMLElement {
         sortedYears.forEach(year => {
             const option = document.createElement('option');
             option.value = year;
-            option.textContent = year;
+            option.textContent = `📅 Cohort ${year}`;
             selectCohort.appendChild(option);
-        });
-
-        const selectBg = this.querySelector('#filter-background');
-        const sortedBgs = Array.from(this.availableBackgrounds).sort((a, b) => a.localeCompare(b));
-        sortedBgs.forEach(bg => {
-            const option = document.createElement('option');
-            option.value = bg;
-            option.textContent = bg;
-            selectBg.appendChild(option);
         });
     }
 
@@ -308,10 +294,7 @@ class MuskleMap extends HTMLElement {
         nodes.forEach(nodeA => {
             let distances = nodes
                 .filter(nodeB => (nodeA.lng !== nodeB.lng || nodeA.lat !== nodeB.lat))
-                .map(nodeB => ({
-                    target: nodeB,
-                    dist: this.calculateDistance(nodeA.lat, nodeA.lng, nodeB.lat, nodeB.lng)
-                }))
+                .map(nodeB => ({ target: nodeB, dist: this.calculateDistance(nodeA.lat, nodeA.lng, nodeB.lat, nodeB.lng) }))
                 .sort((a, b) => a.dist - b.dist);
 
             distances.slice(0, 2).forEach(link => {
@@ -325,91 +308,44 @@ class MuskleMap extends HTMLElement {
     }
 
     setupMapLayers() {
-        this.map.addSource('world-countries', {
-            type: 'geojson',
-            data: 'https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_admin_0_countries.geojson'
-        });
-
-        this.map.addLayer({
-            id: 'country-highlight-fill',
-            type: 'fill',
-            source: 'world-countries',
-            filter: ['==', 'iso_a2', 'NONE'], 
-            paint: { 'fill-color': '#3b82f6', 'fill-opacity': 0.1 }
-        });
-
-        this.map.addLayer({
-            id: 'country-highlight-line',
-            type: 'line',
-            source: 'world-countries',
-            filter: ['==', 'iso_a2', 'NONE'],
-            paint: { 'line-color': '#3b82f6', 'line-width': 1.5, 'line-opacity': 0.5 }
-        });
+        this.map.addSource('world-countries', { type: 'geojson', data: 'https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_admin_0_countries.geojson' });
+        this.map.addLayer({ id: 'country-highlight-fill', type: 'fill', source: 'world-countries', filter: ['==', 'iso_a2', 'NONE'], paint: { 'fill-color': '#3b82f6', 'fill-opacity': 0.08 } });
+        this.map.addLayer({ id: 'country-highlight-line', type: 'line', source: 'world-countries', filter: ['==', 'iso_a2', 'NONE'], paint: { 'line-color': '#3b82f6', 'line-width': 1.5, 'line-opacity': 0.3 } });
 
         this.map.addSource('network-lines', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
-        this.map.addLayer({
-            id: 'network-lines-base',
-            type: 'line',
-            source: 'network-lines',
-            paint: { 'line-color': '#cbd5e1', 'line-width': 1.5, 'line-opacity': 0.3 }
-        });
+        
+        this.map.addLayer({ id: 'network-lines-glow', type: 'line', source: 'network-lines', paint: { 'line-color': '#cbd5e1', 'line-width': 3, 'line-opacity': 0.25, 'line-blur': 2 } });
+        this.map.addLayer({ id: 'network-lines-base', type: 'line', source: 'network-lines', paint: { 'line-color': '#f8fafc', 'line-width': 1.2, 'line-opacity': 0.6 } });
 
-        this.map.addSource('institutions-data', { 
-            type: 'geojson', 
-            data: { type: 'FeatureCollection', features: [] }
-        });
+        this.map.addSource('institutions-data', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
 
         this.map.addLayer({
-            id: 'institutions-glow',
-            type: 'circle',
-            source: 'institutions-data',
-            paint: { 
-                'circle-color': ['get', 'color'], 
-                'circle-radius': ['+', ['get', 'radius'], 6], 
-                'circle-opacity': 0.3, 
-                'circle-blur': 1 
-            }
+            id: 'institutions-glow', type: 'circle', source: 'institutions-data',
+            paint: { 'circle-color': ['get', 'color'], 'circle-radius': ['+', ['get', 'radius'], 8], 'circle-opacity': 0.25, 'circle-blur': 1 }
         });
 
         this.map.addLayer({
-            id: 'institutions-circles',
-            type: 'circle',
-            source: 'institutions-data',
-            paint: { 
-                'circle-color': ['get', 'color'], 
-                'circle-radius': ['get', 'radius'], 
-                'circle-stroke-width': ['get', 'strokeWidth'], 
-                'circle-stroke-color': ['get', 'strokeColor'] 
-            }
+            id: 'institutions-circles', type: 'circle', source: 'institutions-data',
+            paint: { 'circle-color': ['get', 'color'], 'circle-radius': ['get', 'radius'], 'circle-stroke-width': ['get', 'strokeWidth'], 'circle-stroke-color': ['get', 'strokeColor'] }
         });
 
         this.map.addLayer({
-            id: 'institutions-labels',
-            type: 'symbol',
-            source: 'institutions-data',
-            layout: { 
-                'text-field': ['get', 'label'], 
-                'text-size': 13, 
-                'text-font': ['Open Sans Bold', 'Arial Unicode MS Bold'], 
-                'text-allow-overlap': true 
-            },
-            paint: { 'text-color': '#ffffff' }
+            id: 'institutions-labels', type: 'symbol', source: 'institutions-data',
+            layout: { 'text-field': ['get', 'label'], 'text-size': 12, 'text-font': ['Open Sans Bold', 'Arial Unicode MS Bold'], 'text-allow-overlap': true },
+            paint: { 'text-color': ['get', 'textColor'] } 
         });
 
         this.map.on('mouseenter', 'institutions-circles', (e) => {
             this.map.getCanvas().style.cursor = 'pointer';
             const props = e.features[0].properties;
-            const text = props.isCluster ? `${props.totalMembers} Members in this area` : props.cityTitle;
+            const text = props.isCluster ? `${props.totalMembers} Members matching criteria` : props.cityTitle;
             
             this.hoverPopup.setLngLat(e.features[0].geometry.coordinates.slice())
                 .setHTML(`<div style="font-family:'Montserrat',sans-serif; font-weight:600; font-size:13px; color:#111827; padding:6px 10px; border-radius:6px; box-shadow:0 4px 6px rgba(0,0,0,0.1);">${text}</div>`)
                 .addTo(this.map);
         });
         
-        this.map.on('mouseleave', 'institutions-circles', () => {
-            this.map.getCanvas().style.cursor = '';
-            this.hoverPopup.remove();
-        });
+        this.map.on('mouseleave', 'institutions-circles', () => { this.map.getCanvas().style.cursor = ''; this.hoverPopup.remove(); });
 
         this.map.on('click', 'institutions-circles', (e) => {
             const props = e.features[0].properties;
@@ -433,22 +369,26 @@ class MuskleMap extends HTMLElement {
 
         this.institutions.forEach(inst => {
             if (inst.lat === 0 && inst.lng === 0) return;
-
-            let studentCount = 0;
-            let profCount = 0;
             const filteredPeople = [];
 
             inst.people.forEach(person => {
-                const isStudent = person.role === 'student' || person.role === 'étudiant';
-                const isProf = person.role === 'professor' || person.role === 'professeur';
+                const role = person.role ? person.role.toLowerCase() : '';
+                const bg = person.background ? person.background.toLowerCase() : '';
                 
-                const matchCohort = (this.selectedCohort === 'all' || person.year === this.selectedCohort);
-                const matchBackground = (this.selectedBackground === 'all' || person.background === this.selectedBackground);
+                // Recherche inclusive de la cohorte sélectionnée dans le tableau d'années
+                const cohorts = Array.isArray(person.year) ? person.year : [];
+                const matchCohort = (this.selectedCohort === 'all' || cohorts.includes(this.selectedCohort));
+                
+                let matchMode = true;
 
-                if (matchCohort && matchBackground) {
-                    if (isStudent && this.showStudents) { studentCount++; filteredPeople.push(person); }
-                    if (isProf && this.showProfessors) { profCount++; filteredPeople.push(person); }
+                if (this.viewMode === 'role' && this.activeFilter !== 'all') {
+                    if (this.activeFilter === 'professor') matchMode = (role === 'professor' || role === 'professeur');
+                    if (this.activeFilter === 'student') matchMode = (role === 'student' || role === 'étudiant');
+                } else if (this.viewMode === 'background' && this.activeFilter !== 'all') {
+                    matchMode = (bg === this.activeFilter);
                 }
+
+                if (matchCohort && matchMode) { filteredPeople.push(person); }
             });
 
             if (filteredPeople.length > 0) {
@@ -459,26 +399,12 @@ class MuskleMap extends HTMLElement {
                 const cityKey = countryStr ? `${cityStr}, ${countryStr}` : cityStr;
 
                 if (!cityMap.has(cityKey)) {
-                    cityMap.set(cityKey, {
-                        title: cityKey,
-                        lat: inst.lat,
-                        lng: inst.lng,
-                        studentCount: 0,
-                        profCount: 0,
-                        totalMembers: 0,
-                        people: []
-                    });
+                    cityMap.set(cityKey, { title: cityKey, lat: inst.lat, lng: inst.lng, totalMembers: 0, people: [] });
                 }
 
                 const cityGroup = cityMap.get(cityKey);
-                cityGroup.studentCount += studentCount;
-                cityGroup.profCount += profCount;
                 cityGroup.totalMembers += filteredPeople.length;
-                
-                filteredPeople.forEach(p => {
-                    p.institutionName = inst.institution;
-                    cityGroup.people.push(p);
-                });
+                filteredPeople.forEach(p => { p.institutionName = inst.institution; cityGroup.people.push(p); });
             }
         });
 
@@ -513,7 +439,7 @@ class MuskleMap extends HTMLElement {
     renderClusters() {
         if (!this.map || !this.map.getSource('institutions-data')) return;
 
-        const mergeRadius = 45; 
+        const mergeRadius = 15; 
         const clusters = [];
 
         for (const city of this.visibleCities) {
@@ -523,8 +449,6 @@ class MuskleMap extends HTMLElement {
             for (const cluster of clusters) {
                 const dist = Math.hypot(pt.x - cluster.pixel.x, pt.y - cluster.pixel.y);
                 if (dist < mergeRadius) {
-                    cluster.studentCount += city.studentCount;
-                    cluster.profCount += city.profCount;
                     cluster.totalMembers += city.totalMembers;
                     cluster.cities.push(city);
                     merged = true;
@@ -533,15 +457,7 @@ class MuskleMap extends HTMLElement {
             }
 
             if (!merged) {
-                clusters.push({
-                    lng: city.lng,
-                    lat: city.lat,
-                    pixel: pt,
-                    studentCount: city.studentCount,
-                    profCount: city.profCount,
-                    totalMembers: city.totalMembers,
-                    cities: [city]
-                });
+                clusters.push({ lng: city.lng, lat: city.lat, pixel: pt, totalMembers: city.totalMembers, cities: [city] });
             }
         }
 
@@ -549,41 +465,35 @@ class MuskleMap extends HTMLElement {
         
         clusters.forEach(c => {
             const isCluster = c.cities.length > 1;
+            const finalRadius = Math.min(Math.max(8, 8 + Math.sqrt(c.totalMembers) * 2.5), 24); 
             
-            let pointColor = '#1B365D'; 
-            let strokeColor = '#ffffff';
-            let strokeWidth = 2;
+            let pointColor = '#ffffff'; 
+            let strokeColor = '#cbd5e1';
+            let strokeWidth = 1;
 
-            const baseRadius = Math.min(Math.max(12, 10 + (c.totalMembers * 2)), 30);
-            const finalRadius = isCluster ? baseRadius + 4 : baseRadius; 
-
-            if (c.studentCount > 0 && c.profCount === 0) {
-                pointColor = '#F2A900'; 
-            } else if (c.studentCount > 0 && c.profCount > 0) {
-                pointColor = '#1B365D';
-                strokeColor = '#F2A900'; 
-                strokeWidth = Math.max(4, finalRadius * 0.25); 
+            if (this.viewMode === 'role') {
+                if (this.activeFilter === 'professor') { pointColor = '#1d4ed8'; strokeColor = '#ffffff'; strokeWidth = 1.5; }
+                else if (this.activeFilter === 'student') { pointColor = '#bae6fd'; strokeColor = '#0284c7'; strokeWidth = 1; }
+            } else if (this.viewMode === 'background') {
+                if (this.activeFilter === 'cell') { pointColor = '#ea580c'; strokeColor = '#ffffff'; strokeWidth = 1.5; }
+                else if (this.activeFilter === 'tissue') { pointColor = '#eab308'; strokeColor = '#ffffff'; strokeWidth = 1.5; }
+                else if (this.activeFilter === 'organism') { pointColor = '#38bdf8'; strokeColor = '#ffffff'; strokeWidth = 1.5; }
             }
 
-            let label = '';
-            if (isCluster || c.totalMembers > 1) {
-                label = c.totalMembers.toString();
+            let label = (isCluster || c.totalMembers > 1) ? c.totalMembers.toString() : '';
+            let textColor = '#ffffff'; 
+            if (pointColor === '#ffffff' || pointColor === '#bae6fd') {
+                textColor = '#111827'; 
             }
 
             features.push({
                 type: 'Feature',
                 geometry: { type: 'Point', coordinates: [c.lng, c.lat] },
                 properties: {
-                    isCluster: isCluster,
-                    cityTitle: isCluster ? 'Cluster' : c.cities[0].title,
-                    studentCount: c.studentCount,
-                    profCount: c.profCount,
-                    totalMembers: c.totalMembers,
-                    radius: finalRadius,
-                    color: pointColor,
-                    strokeColor: strokeColor,
-                    strokeWidth: strokeWidth,
-                    label: label
+                    isCluster: isCluster, cityTitle: isCluster ? 'Cluster' : c.cities[0].title,
+                    totalMembers: c.totalMembers, radius: finalRadius,
+                    color: pointColor, strokeColor: strokeColor, strokeWidth: strokeWidth, label: label,
+                    textColor: textColor 
                 }
             });
         });
@@ -608,7 +518,6 @@ class MuskleMap extends HTMLElement {
         this.querySelector('#info-empty').style.display = 'none';
         this.querySelector('#info-active').style.display = 'flex';
         this.querySelector('#info-title').innerText = cityNode.title;
-        
         const content = this.querySelector('#info-content');
         
         const renderProfiles = (limit) => {
@@ -620,14 +529,30 @@ class MuskleMap extends HTMLElement {
                 card.className = 'muskle-profile-card';
 
                 const imagePath = `images/${person.photo}`;
-                const roleColor = (person.role === 'student' || person.role === 'étudiant') ? '#F2A900' : '#1B365D';
+                let roleColor = '#1B365D';
+                if (person.role && (person.role.toLowerCase() === 'student' || person.role.toLowerCase() === 'étudiant')) {
+                    roleColor = '#38bdf8'; 
+                }
                 
-                let roleDisplay = person.role === 'étudiant' ? 'Student' : 
-                                  person.role === 'professeur' ? 'Professor' : 
-                                  person.role.charAt(0).toUpperCase() + person.role.slice(1);
+                let roleDisplay = person.role === 'étudiant' ? 'Student' : person.role === 'professeur' ? 'Professor' : person.role ? person.role.charAt(0).toUpperCase() + person.role.slice(1) : '';
 
-                const bgTag = person.background ? `<span style="font-size: 12px; font-weight: 600; color: #475569; background: #f1f5f9; padding: 4px 12px; border-radius: 20px; border: 1px solid #e2e8f0;">Background: ${person.background}</span>` : '';
-                const cohortTag = person.year ? `<span style="font-size: 12px; font-weight: 600; color: #475569; background: #f1f5f9; padding: 4px 12px; border-radius: 20px; border: 1px solid #e2e8f0;">Cohort: ${person.year}</span>` : '';
+                let bgTag = '';
+                if (person.background) {
+                    const bgLower = person.background.toLowerCase();
+                    let bgStyleColor = '#475569';
+                    if (bgLower === 'cell') bgStyleColor = '#ea580c';
+                    else if (bgLower === 'tissue') bgStyleColor = '#eab308';
+                    else if (bgLower === 'organism') bgStyleColor = '#38bdf8';
+                    
+                    bgTag = `<span style="font-size: 12px; font-weight: 600; color: ${bgStyleColor}; padding: 4px 12px; border-radius: 20px; border: 1px solid ${bgStyleColor}40; background: ${bgStyleColor}10;">${person.background}</span>`;
+                }
+
+                // Génération de l'étiquette de cohorte dynamique (singulier ou pluriel)
+                let cohortTag = '';
+                if (Array.isArray(person.year) && person.year.length > 0) {
+                    const label = person.year.length > 1 ? 'Cohorts' : 'Cohort';
+                    cohortTag = `<span style="font-size: 12px; font-weight: 600; color: #475569; background: #f1f5f9; padding: 4px 12px; border-radius: 20px; border: 1px solid #e2e8f0;">${label}: ${person.year.join(', ')}</span>`;
+                }
 
                 const instTag = person.institutionName ? `<div class="muskle-profile-inst">🏢 ${person.institutionName}</div>` : '';
 
@@ -650,7 +575,6 @@ class MuskleMap extends HTMLElement {
                     </a>
                 ` : '';
 
-                // Refactored structure to let Bio text span full width
                 card.innerHTML = `
                     <div class="muskle-profile-header">
                         <img class="muskle-profile-avatar" src="${imagePath}" alt="${person.firstName}" style="border: 3px solid ${roleColor};">
@@ -658,9 +582,7 @@ class MuskleMap extends HTMLElement {
                             <h4 class="muskle-profile-name">${person.firstName} ${person.lastName}</h4>
                             ${instTag}
                             <div class="muskle-profile-tags">
-                                <span style="font-size: 12px; font-weight: 600; color: ${roleColor}; padding: 4px 12px; border-radius: 20px; border: 1px solid ${roleColor}40; background: ${roleColor}10;">
-                                    ${roleDisplay}
-                                </span>
+                                ${roleDisplay ? `<span style="font-size: 12px; font-weight: 600; color: ${roleColor}; padding: 4px 12px; border-radius: 20px; border: 1px solid ${roleColor}40; background: ${roleColor}10;">${roleDisplay}</span>` : ''}
                                 ${cohortTag}
                                 ${bgTag}
                             </div>
@@ -711,7 +633,6 @@ class MuskleMap extends HTMLElement {
                 moreBtnContainer.appendChild(moreBtn);
                 content.appendChild(moreBtnContainer);
             }
-            
             this.querySelector('.muskle-panel-box').scrollTop = 0;
         };
 

@@ -5,17 +5,13 @@ from collections import defaultdict
 import os
 
 # --- CONFIGURATION ---
-# Google Sheets CSV export link
 SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTGgQr28giHo9pFs8acJopPPKDE5N9b7BGszbcKcl2n-3uhKA4mpoe4VdkmtzCdF-hqqBZokys-8DYm/pub?output=csv"
 
-# Output path for the generated JSON
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 OUTPUT_FILE = os.path.join(SCRIPT_DIR, "..", "data.json")
 
 def fetch_ror_data(ror_id):
     """Queries the ROR API v2 to retrieve institution location and details."""
-    
-    # Extract the raw ROR ID
     clean_id = ror_id.strip().split("/")[-1]
     api_url = f"https://api.ror.org/v2/organizations/{clean_id}"
     
@@ -24,7 +20,6 @@ def fetch_ror_data(ror_id):
         if response.status_code == 200:
             data = response.json()
             
-            # Extract primary institution name
             name = "Unknown Institution"
             names_array = data.get("names", [])
             for n in names_array:
@@ -34,7 +29,6 @@ def fetch_ror_data(ror_id):
             if name == "Unknown Institution" and names_array:
                 name = names_array[0].get("value", "Unknown Institution")
                 
-            # Extract geographical data
             city = "Unknown City"
             lat = 0.0
             lng = 0.0
@@ -68,7 +62,6 @@ def main():
     lines = response.text.splitlines()
     reader = csv.DictReader(lines)
     
-    # Initialize the institution dictionary
     institutions = defaultdict(lambda: {
         "institution": "",
         "city": "",
@@ -84,31 +77,31 @@ def main():
         if not ror_id:
             continue
 
-        # Fetch external API data only for new institutions
         if not institutions[ror_id]["institution"]:
             print(f"   -> Querying API for: {ror_id}")
             ror_data = fetch_ror_data(ror_id)
             if ror_data:
                 institutions[ror_id].update(ror_data)
         
-        # Assign default photo if missing
         photo = row.get("Photo", "").strip()
         if not photo:
             photo = "default-avatar.jpg"
 
-        # Append profile data to the specific institution
+        # Traitement des années multiples avec le séparateur ";"
+        year_raw = row.get("Year", "").strip()
+        years_list = [y.strip() for y in year_raw.split(";")] if year_raw else []
+
         institutions[ror_id]["people"].append({
             "firstName": row.get("First Name", "").strip(),
             "lastName": row.get("Last Name", "").strip(),
             "role": row.get("Role", "").strip().lower(),
-            "year": row.get("Year", "").strip(),
+            "year": years_list, # Désormais une liste d'années
             "linkedin": row.get("LinkedIn", "").strip(),
             "photo": photo,
             "background": row.get("Background", "").strip(),
             "biosketch": row.get("Biosketch", "").strip()
         })
 
-    # Format output data
     final_data = list(institutions.values())
 
     os.makedirs(os.path.dirname(OUTPUT_FILE), exist_ok=True)
