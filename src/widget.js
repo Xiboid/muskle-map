@@ -632,7 +632,10 @@ class MuskleMap extends HTMLElement {
                 const card = document.createElement('div');
                 card.className = 'muskle-profile-card';
 
-                const imagePath = `images/${person.photo}`;
+                // Photos folder: `data-images-url` attribute, or the `images/` folder next to data.json
+                const imagesBase = this.getAttribute('data-images-url')
+                    || new URL('images/', new URL(this.getAttribute('data-url') || './data.json', document.baseURI)).href;
+                const imagePath = `${imagesBase}${person.photo}`;
                 let roleColor = '#1B365D';
                 if (person.role && (person.role.toLowerCase() === 'student' || person.role.toLowerCase() === 'étudiant')) {
                     roleColor = '#38bdf8'; 
